@@ -24,7 +24,7 @@
   },
 
   "contact": {
-    "label": "Ich antworte dir innerhalb von 12 Stunden",
+    "label": "Du hast Fragen?",
     "heading": "Schreib <span class='italic'>mich</span> an",
     "linkIcon": "/icons/arrow-icon.svg",
     "email": "info@alpine-dev.de"
