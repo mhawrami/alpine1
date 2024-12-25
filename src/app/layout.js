@@ -3,9 +3,9 @@ import Global from '@/components/Global';
 import './globals.css';
 
 export const metadata = {
-  title: 'Bentolio',
+  title: 'Alpine Development',
   description:
-    'Bentolio is a clean and customizable portfolio template built on Bento Grids, perfect for showcasing your work.',
+    'IT-Lösungen für Ihr Business – Von der Idee bis zur Umsetzung',
 };
 
 const fontHeading = DM_Serif_Display({
