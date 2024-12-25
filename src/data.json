@@ -1,16 +1,16 @@
 {
   "nav": {
-    "logo": "Bentolio",
+    "logo": "Alpine Development",
     "links": [
       {
-        "title": "Buy Next.js template",
+        "title": "Lass uns reden",
         "url": "https://rauftech.lemonsqueezy.com/buy/43d4f6ca-c525-497f-a77a-8148150335dc"
       }
     ]
   },
 
   "intro": {
-    "heading": "Let’s create dance floor <span class='italic'> magic</span> for your special day",
+    "heading": "<span class='italic'>Design</span>, das begeistert. <span class='italic'>Technologie</span>, die funktioniert.",
     "icon": "/icons/intro-icon.svg"
   },
    
@@ -19,45 +19,50 @@
   },
 
   "about": {
-    "text": "DJ Lisa is a passionate wedding DJ, acclaimed for blending diverse musical genres with expert crowd-reading skills. Based in Florida, she crafts personalized soundtracks that turn every wedding into an unforgettable celebration.",
+    "text": "Ich bin Moe und dein Partner für alles rund um Webentwicklung, Design und IT-Consulting. Mein Ziel ist es, dich mit modernen und nachhaltigen IT-Lösungen zu unterstützen, damit dein Business auf die nächste Stufe gehoben wird",
     "icon": "/icons/about-icon.svg"
   },
 
   "contact": {
-    "label": "Have some questions?",
-    "heading": "Contact <span class='italic'>me</span>",
+    "label": "Bist du für eine Zusammenarbeit?",
+    "heading": "Schreib <span class='italic'>mich</span> an",
     "linkIcon": "/icons/arrow-icon.svg",
-    "email": "hello@rauftech.com"
+    "email": "info@alpine-dev.de"
   },
 
   "work": {
     "projects": [
       {
-        "title": "First Dance",
-        "url": "",
+        "title": "Die Rehapraxis",
+        "url": "https://forumstarkeknochen.de/",
         "media": "/work.png"
       },
       {
-        "title": "Cocktail Hour",
-        "url": "",
-        "media": "/work.png"
-
-      },
-      {
-        "title": "Dinner Music",
-        "url": "",
+        "title": "Der Fotograf",
+        "url": "https://amielpretsch.com",
         "media": "/work.png"
 
       },
       {
-        "title": "After Party",
-        "url": "",
+        "title": "Logistik & Reinigung",
+        "url": "https://ebrahous.de",
         "media": "/work.png"
 
       },
       {
-        "title": "Last Dance",
-        "url": "",
+        "title": "Die Taxifirma",
+        "url": "https://osloprime.de",
+        "media": "/work.png"
+
+      },
+      {
+        "title": "Bodenbelag - seit 1900",
+        "url": "https://norkauer.de",
+        "media": "/work.png"
+      },
+      {
+        "title": "Das Kinderhilfswerk",
+        "url": "https://planet-children.de",
         "media": "/work.png"
       }
     ],
