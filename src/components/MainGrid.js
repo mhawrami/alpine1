@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import Nav from './Nav'; // Ensure Nav is marked as a Client Component if necessary
+import Nav from './Nav';
 
 export default function MainGrid({ data }) {
   const [isImpressum, setIsImpressum] = useState(false);
@@ -10,16 +10,20 @@ export default function MainGrid({ data }) {
   const toggleContent = () => {
     const textContainer = document.querySelector('.dynamic-text');
 
-    const timeline = gsap.timeline();
-
-    timeline.to(textContainer, {
-      opacity: 0,
-      duration: 0.5,
-      onComplete: () => {
-        setIsImpressum(prev => !prev);
-        timeline.to(textContainer, { opacity: 1, duration: 0.5 });
-      },
-    });
+    // Ensure `gsap` animations run on the client
+    if (typeof window !== 'undefined') {
+      const timeline = gsap.timeline();
+      timeline.to(textContainer, {
+        opacity: 0,
+        duration: 0.5,
+        onComplete: () => {
+          setIsImpressum(prev => !prev); // Toggle the state
+          timeline.to(textContainer, { opacity: 1, duration: 0.5 });
+        },
+      });
+    } else {
+      setIsImpressum(prev => !prev);
+    }
   };
 
   const aboutMeText =
@@ -27,11 +31,4 @@ export default function MainGrid({ data }) {
   const impressumText = 'Hier stehen die Impressum-Informationen deines Unternehmens.';
 
   return (
-    <div className='main-grid w-full h-full flex items-center justify-center'>
-      <div className='dynamic-text text-center max-w-2xl'>
-        <p>{isImpressum ? impressumText : aboutMeText}</p>
-      </div>
-      <Nav toggleContent={toggleContent} isImpressum={isImpressum} data={data} />
-    </div>
-  );
-}
+    <div className='main-grid w-full h-full flex items-center justify-center
