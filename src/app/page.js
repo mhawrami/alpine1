@@ -1,4 +1,18 @@
 import { promises as fs } from 'fs';
+import About from '@/components/About';
+import data from '@/data.json';
+export default function Home({ data }) {
+  const { about, nav } = data;
+
+  return (
+    <div>
+      <About data={about} nav={nav} timeline={{}} />
+    </div>
+  );
+}
+
+
+
 
 import MainGrid from '@/components/MainGrid';
 
