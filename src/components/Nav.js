@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import Box from './Box';
 
-export default function Nav({ data, timeline }) {
+export default function Nav({ data, toggleContent, isImpressum }) {
   const contentAnimation = delay => {
     timeline
       .from('.logo', { x: -30, opacity: 0 }, delay + 0.3)
@@ -18,19 +19,20 @@ export default function Nav({ data, timeline }) {
           <span className='block'>{data?.logo}</span>
         </div>
         <div className='cta flex items-center gap-4'>
-          {data?.links?.map(link => (
-            <a
-              key={link.title}
-              href={link.url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='inline-block'
-            >
-              <button className='rounded-xl border border-secondary bg-secondary px-4 py-3 pt-3.5 font-medium uppercase text-primary'>
-                {link.title}
+          {data?.links?.map(link => {
+            const isImpressumLink = link.title === 'IMPRESSUM';
+            return (
+              <button
+                key={link.title}
+                onClick={isImpressumLink ? toggleContent : undefined}
+                className={`rounded-xl border border-secondary bg-secondary px-4 py-3 pt-3.5 font-medium uppercase text-primary ${
+                  isImpressumLink ? 'cursor-pointer' : ''
+                }`}
+              >
+                {isImpressumLink && isImpressum ? 'Über mich' : link.title}
               </button>
-            </a>
-          ))}
+            );
+          })}
         </div>
       </nav>
     </Box>
