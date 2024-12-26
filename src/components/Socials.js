@@ -2,17 +2,15 @@ import Box from './Box';
 import About from '../components/About';
 import data from '../data.json';
 
-export default function Home({ data }) {
-  const { about, nav } = data;
+export default function Socials({ data, timeline }) {
+ const { about, nav } = data;
 
   return (
     <div>
       <About data={about} nav={nav} timeline={{}} />
     </div>
   );
-}
-
-export default function Socials({ data, timeline }) {
+  
   const contentAnimation = delay => {
     timeline.from(
       '.social-link',
