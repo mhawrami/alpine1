@@ -1,6 +1,6 @@
 import Box from './Box';
 import About from '../components/About';
-import data from '../components/data.json';
+import data from '../components/data';
 
 export default function Socials({ data, timeline }) {
  const { about, nav } = data;
