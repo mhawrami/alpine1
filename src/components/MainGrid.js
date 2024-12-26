@@ -1,41 +1,67 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
-import { gsap } from 'gsap';
-import Nav from './Nav';
+import About from '@/components/About';
+import Contact from '@/components/Contact';
+import Intro from '@/components/Intro';
+import Nav from '@/components/Nav';
+import Portrait from '@/components/Portrait';
+import Socials from '@/components/Socials';
+import Work from '@/components/Work';
+import { useGlobalTimeline } from '@/hooks/useAnimation';
+import LoadingBar from '@/components/LoadingBar';
+import { DISABLE_LOADING_ANIMATION } from '@/config';
 
-export default function MainGrid({ data }) {
-  const [isImpressum, setIsImpressum] = useState(false);
-
-  const toggleContent = () => {
-    const textContainer = document.querySelector('.dynamic-text');
-
-    // Ensure `gsap` animations run on the client
-    if (typeof window !== 'undefined') {
-      const timeline = gsap.timeline();
-      timeline.to(textContainer, {
-        opacity: 0,
-        duration: 0.5,
-        onComplete: () => {
-          setIsImpressum(prev => !prev); // Toggle the state
-          timeline.to(textContainer, { opacity: 1, duration: 0.5 });
-        },
-      });
-    } else {
-      setIsImpressum(prev => !prev);
-    }
-  };
-
-  const aboutMeText =
-    'Ich bin Moe und dein Partner für alles rund um Webentwicklung, Design und IT-Consulting. Mein Ziel ist es, dich mit modernen und nachhaltigen IT-Lösungen zu unterstützen, damit dein Business auf die nächste Stufe gehoben wird';
-  const impressumText = 'Hier stehen die Impressum-Informationen deines Unternehmens.';
+export default function MainGrid({ data = {} }) {
+  const [loaded, setLoaded] = useState(DISABLE_LOADING_ANIMATION);
+  const tl = useGlobalTimeline(loaded);
 
   return (
-    <div className='main-grid w-full h-full flex items-center justify-center'>
-      <div className='dynamic-text text-center max-w-2xl'>
-        <p>{isImpressum ? impressumText : aboutMeText}</p>
+    <>
+      {!DISABLE_LOADING_ANIMATION && (
+        <LoadingBar onFinish={() => setLoaded(true)} />
+      )}
+
+      {/* Bento Grid */}
+      <div className='grid h-screen max-h-[75rem] min-h-[50rem] grid-cols-12 grid-rows-10 gap-4 p-4 max-lg:h-auto max-lg:max-h-none max-lg:grid-rows-none max-lg:py-6'>
+        <div className='col-span-full row-span-1'>
+          <Nav data={data?.nav} timeline={tl} />
+        </div>
+
+        {/* Left column */}
+        <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
+          <div className='col-span-5 row-span-5 max-lg:col-span-8 max-md:col-span-full'>
+            <Intro data={data?.intro} timeline={tl} />
+          </div>
+
+          <div className='col-span-3 row-span-5 max-lg:col-span-4 max-md:col-span-full'>
+            <Portrait data={data?.portrait} timeline={tl} />
+          </div>
+
+          <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:col-span-full'>
+            <About data={data?.about} timeline={tl} />
+          </div>
+
+          <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:hidden'>
+            <Contact data={data?.contact} timeline={tl} />
+          </div>
+        </div>
+
+        {/* Right column */}
+        <div className='col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
+          <div className='col-span-4 row-span-8 max-lg:col-span-full'>
+            <Work data={data?.work} timeline={tl} />
+          </div>
+
+          <div className='col-span-full hidden max-lg:min-h-[20rem] max-md:block'>
+            <Contact data={data?.contact} timeline={tl} />
+          </div>
+
+          <div className='col-span-4 row-span-1 max-lg:col-span-full max-lg:min-h-[5rem]'>
+            <Socials data={data?.socials} timeline={tl} />
+          </div>
+        </div>
       </div>
-      <Nav toggleContent={toggleContent} isImpressum={isImpressum} data={data} />
-    </div>
+    </>
   );
 }
