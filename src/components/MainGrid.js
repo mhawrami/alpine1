@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { gsap } from 'gsap';
 import Nav from './Nav';
 
@@ -31,4 +31,11 @@ export default function MainGrid({ data }) {
   const impressumText = 'Hier stehen die Impressum-Informationen deines Unternehmens.';
 
   return (
-    <div className='main-grid w-full h-full flex items-center justify-center
+    <div className='main-grid w-full h-full flex items-center justify-center'>
+      <div className='dynamic-text text-center max-w-2xl'>
+        <p>{isImpressum ? impressumText : aboutMeText}</p>
+      </div>
+      <Nav toggleContent={toggleContent} isImpressum={isImpressum} data={data} />
+    </div>
+  );
+}
