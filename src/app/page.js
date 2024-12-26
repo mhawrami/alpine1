@@ -1,17 +1,24 @@
-import { promises as fs } from 'fs';
-import MainGrid from '@/components/MainGrid';
-import About from '@/components/About'; // Import About component
+"use client";
 
-export default async function Home() {
-  const file = await fs.readFile(process.cwd() + '/src/data.json', 'utf8');
-  const data = JSON.parse(file);
+import { useEffect, useState } from 'react';
+import MainGrid from '@/components/MainGrid';
+import About from '@/components/About';
+
+export default function Home() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from an API or static file
+    fetch('/data.json')
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  if (!data) return <div>Loading...</div>;
 
   return (
-    <main className='w-full'>
-      {/* Pass data to MainGrid as before */}
+    <main className="w-full">
       <MainGrid data={data} />
-      
-      {/* Pass about and nav data to About */}
       <About data={data.about} nav={data.nav} timeline={{}} />
     </main>
   );
