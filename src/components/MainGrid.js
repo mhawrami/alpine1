@@ -9,12 +9,16 @@ export default function MainGrid({ data }) {
 
   const toggleContent = () => {
     const textContainer = document.querySelector('.dynamic-text');
-    gsap.to(textContainer, {
+
+    // Create a new GSAP timeline
+    const timeline = gsap.timeline();
+
+    timeline.to(textContainer, {
       opacity: 0,
       duration: 0.5,
       onComplete: () => {
         setIsImpressum(prev => !prev);
-        gsap.to(textContainer, { opacity: 1, duration: 0.5 });
+        timeline.to(textContainer, { opacity: 1, duration: 0.5 });
       },
     });
   };
