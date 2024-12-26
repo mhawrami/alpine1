@@ -14,7 +14,7 @@ const AboutSection = () => {
         <ul>
           <li>
             <a href="#" onClick={handleImpressumClick}>
-              {showImprint ? 'Über mich' : 'IMPRESSUM'}
+              {showImprint ? 'Über mich' : 'Impressum'}
             </a>
           </li>
         </ul>
