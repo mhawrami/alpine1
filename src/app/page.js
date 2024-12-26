@@ -1,20 +1,6 @@
 import { promises as fs } from 'fs';
-import About from '@/components/About';
-import data from '@/data.json';
-export default function Home({ data }) {
-  const { about, nav } = data;
-
-  return (
-    <div>
-      <About data={about} nav={nav} timeline={{}} />
-    </div>
-  );
-}
-
-
-
-
 import MainGrid from '@/components/MainGrid';
+import About from '@/components/About'; // Import About component
 
 export default async function Home() {
   const file = await fs.readFile(process.cwd() + '/src/data.json', 'utf8');
@@ -22,7 +8,11 @@ export default async function Home() {
 
   return (
     <main className='w-full'>
+      {/* Pass data to MainGrid as before */}
       <MainGrid data={data} />
+      
+      {/* Pass about and nav data to About */}
+      <About data={data.about} nav={data.nav} timeline={{}} />
     </main>
   );
 }
