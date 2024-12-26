@@ -4,7 +4,7 @@
     "links": [
       {
         "title": "Lass uns reden",
-        "url": "https://rauftech.lemonsqueezy.com/buy/43d4f6ca-c525-497f-a77a-8148150335dc"
+        "url": "tel:017621855799"
       }
     ]
   },
@@ -33,37 +33,42 @@
   "work": {
     "projects": [
       {
-        "title": "Die Rehapraxis",
+        "title": "Praxis",
         "url": "https://forumstarkeknochen.de/",
-        "media": "/work.png"
+        "media": "/work1.jpg"
       },
       {
-        "title": "Der Fotograf",
+        "title": "Fotografie",
         "url": "https://amielpretsch.com",
-        "media": "/work.png"
+        "media": "/work2.jpg"
 
       },
       {
         "title": "Logistik & Reinigung",
         "url": "https://ebrahous.de",
-        "media": "/work.png"
+        "media": "/work3.jpg"
 
       },
       {
-        "title": "Die Taxifirma",
+        "title": "Taxiservices",
         "url": "https://osloprime.de",
-        "media": "/work.png"
+        "media": "/work4.jpg"
 
       },
       {
-        "title": "Bodenbelag - seit 1900",
+        "title": "Bodenbelag",
         "url": "https://norkauer.de",
-        "media": "/work.png"
+        "media": "/work5.jpg"
       },
       {
-        "title": "Das Kinderhilfswerk",
+        "title": "Kinderhilfswerk",
         "url": "https://planet-children.de",
-        "media": "/work.png"
+        "media": "/work6.jpg"
+      },
+      {
+        "title": "Immobilien",
+        "url": "https://bb-immobilien.gmbh/",
+        "media": "/work7.jpg"
       }
     ],
     "linkIcon": "/icons/arrow-icon-black.svg"  
@@ -73,16 +78,16 @@
   "socials": {
     "links": [
       {
-        "title": "Figma",
-        "url": "https://www.figma.com/@lilcoderman"
+        "title": "Whatsapp",
+        "url": "https://wa.me/017621855799"
       },
       {
         "title": "Instagram",
-        "url": "https://www.instagram.com/lilcoderman/"
+        "url": "https://www.instagram.com/moexxoe/"
       },
       {
-        "title": "Github",
-        "url": "https://github.com/abdulrauf11"
+        "title": "Impressum",
+        "url": "https://alpine-dev.de/impressum.html"
       }
     ]
   }
