@@ -11,7 +11,18 @@ import Work from '@/components/Work';
 import { useGlobalTimeline } from '@/hooks/useAnimation';
 import LoadingBar from '@/components/LoadingBar';
 import { DISABLE_LOADING_ANIMATION } from '@/config';
+import About from '../components/About';
+import data from '../data.json';
 
+export default function Home({ data }) {
+  const { about, nav } = data;
+
+  return (
+    <div>
+      <About data={about} nav={nav} timeline={{}} />
+    </div>
+  );
+}
 export default function MainGrid({ data = {} }) {
   const [loaded, setLoaded] = useState(DISABLE_LOADING_ANIMATION);
   const tl = useGlobalTimeline(loaded);
