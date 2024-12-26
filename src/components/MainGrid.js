@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { gsap } from 'gsap';
-import Nav from './Nav'; // Adjust the path if necessary
+import Nav from './Nav'; // Ensure Nav is marked as a Client Component if necessary
 
 export default function MainGrid({ data }) {
   const [isImpressum, setIsImpressum] = useState(false);
@@ -10,7 +10,6 @@ export default function MainGrid({ data }) {
   const toggleContent = () => {
     const textContainer = document.querySelector('.dynamic-text');
 
-    // Create a new GSAP timeline
     const timeline = gsap.timeline();
 
     timeline.to(textContainer, {
@@ -32,7 +31,6 @@ export default function MainGrid({ data }) {
       <div className='dynamic-text text-center max-w-2xl'>
         <p>{isImpressum ? impressumText : aboutMeText}</p>
       </div>
-      {/* Pass toggleContent to Nav */}
       <Nav toggleContent={toggleContent} isImpressum={isImpressum} data={data} />
     </div>
   );
