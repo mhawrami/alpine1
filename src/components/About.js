@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Box from './Box';
 
-export default function About({ data, timeline }) {
+export default function About({ data, timeline, nav }) {
   const [showImprint, setShowImprint] = useState(false);
 
   const contentAnimation = (delay) => {
@@ -16,9 +16,12 @@ export default function About({ data, timeline }) {
       );
   };
 
-  const handleToggleText = () => {
+  const handleToggleText = (e) => {
+    e.preventDefault(); // Prevent default link behavior
     setShowImprint(!showImprint);
   };
+
+  const impressumLink = nav.links.find((link) => link.title === 'Impressum');
 
   return (
     <Box
@@ -48,12 +51,15 @@ export default function About({ data, timeline }) {
         </p>
 
         {/* Toggle Link */}
-        <button
-          onClick={handleToggleText}
-          className='text-blue-500 underline hover:text-blue-700'
-        >
-          {showImprint ? 'Über mich' : 'IMPRESSUM'}
-        </button>
+        {impressumLink && (
+          <a
+            href={impressumLink.url}
+            onClick={handleToggleText}
+            className='text-blue-500 underline hover:text-blue-700'
+          >
+            {showImprint ? 'Über mich' : impressumLink.title}
+          </a>
+        )}
       </div>
     </Box>
   );
