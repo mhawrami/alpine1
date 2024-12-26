@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import Box from './Box';
 
 export default function About({ data, timeline }) {
-  const contentAnimation = delay => {
+  const [showImprint, setShowImprint] = useState(false);
+
+  const contentAnimation = (delay) => {
     const offset = 0.3;
     timeline
       .from('.about-text', { opacity: 0, y: 30, duration: 0.8 }, delay + offset)
@@ -11,6 +14,10 @@ export default function About({ data, timeline }) {
         { opacity: 0, rotate: 180, duration: 1, ease: 'slow.out' },
         delay + offset
       );
+  };
+
+  const handleToggleText = () => {
+    setShowImprint(!showImprint);
   };
 
   return (
@@ -33,9 +40,20 @@ export default function About({ data, timeline }) {
           )}
         </div>
 
+        {/* Text with dynamic content */}
         <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
-          {data?.text}
+          {showImprint
+            ? 'Your company imprint information goes here.'
+            : data?.text}
         </p>
+
+        {/* Toggle Link */}
+        <button
+          onClick={handleToggleText}
+          className='text-blue-500 underline hover:text-blue-700'
+        >
+          {showImprint ? 'Über mich' : 'IMPRESSUM'}
+        </button>
       </div>
     </Box>
   );
