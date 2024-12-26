@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from 'react';
 import { gsap } from 'gsap';
+import Nav from './Nav'; // Adjust the path if necessary
 
 export default function MainGrid({ data }) {
   const [isImpressum, setIsImpressum] = useState(false);
