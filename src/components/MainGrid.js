@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Intro from '@/components/Intro';
@@ -19,14 +19,23 @@ export default function MainGrid({ data = {} }) {
   // State for toggling Impressum text
   const [isImpressumActive, setIsImpressumActive] = useState(false);
 
+  // Ref for the About section
+  const aboutRef = useRef(null);
+
   // Function to toggle Impressum state
   const toggleImpressum = () => {
     setIsImpressumActive(!isImpressumActive);
+
+    // Scroll to the About section
+    if (aboutRef.current) {
+      aboutRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   // Impressum content styled with Tailwind
   const impressumDetails = `
     <div class="p-4">
+      <h3 class="text-xl font-bold mb-4">Impressum</h3>
       <div class="mb-4">
         <b class="block text-sm font-medium">Vertreten durch:</b>
         <p class="text-sm">Mohammed Hawrami<br>Sankt-Veit-Str. 26<br>81673 München</p>
@@ -39,7 +48,9 @@ export default function MainGrid({ data = {} }) {
         </p>
       </div>
       <div>
+        <b class="block text-sm font-medium">Rechtsform:</b>
         <p class="text-sm">
+          Einzelunternehmen<br>
           Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed Hawrami
         </p>
       </div>
@@ -68,7 +79,10 @@ export default function MainGrid({ data = {} }) {
             <Portrait data={data?.portrait} timeline={tl} />
           </div>
 
-          <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:col-span-full'>
+          <div
+            ref={aboutRef} // Attach the ref to the About section
+            className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:col-span-full'
+          >
             {/* Pass toggled Impressum content to About component */}
             <About
               data={{
