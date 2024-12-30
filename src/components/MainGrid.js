@@ -24,6 +24,20 @@ export default function MainGrid({ data = {} }) {
     setIsImpressumActive(!isImpressumActive);
   };
 
+  // Impressum content
+  const impressumDetails = `
+    <h3>Impressum</h3><br><br>
+    <b>Vertreten durch:</b><br>
+    <p>Mohammed Hawrami<br>
+    Sankt-Veit-Str. 26<br>
+    81673 München</p><br><br>
+    <b>Kontakt:</b><br>
+    <b>Telefon:</b> (089) 5591 6536<br>
+    <b>E-Mail:</b> info@alpine-dev.de<br><br>
+    <b>Rechtsform:</b> Einzelunternehmen<br>
+    Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed Hawrami
+  `;
+
   return (
     <>
       {!DISABLE_LOADING_ANIMATION && (
@@ -47,15 +61,14 @@ export default function MainGrid({ data = {} }) {
           </div>
 
           <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:col-span-full'>
-            {/* Pass toggled text to About component */}
+            {/* Pass toggled Impressum content to About component */}
             <About
               data={{
                 ...data?.about,
-                text: isImpressumActive
-                  ? "This is the Impressum content."
-                  : data?.about?.text,
+                text: isImpressumActive ? impressumDetails : data?.about?.text,
               }}
               timeline={tl}
+              isImpressumActive={isImpressumActive}
             />
           </div>
 
