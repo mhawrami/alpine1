@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Box from './Box';
 
-export default function About({ data, timeline }) {
+export default function About({ data, timeline, isImpressumActive }) {
   const contentAnimation = delay => {
     const offset = 0.3;
     timeline
@@ -33,10 +33,33 @@ export default function About({ data, timeline }) {
           )}
         </div>
 
-        {/* Dynamic Text */}
-        <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
-          {data?.text}
-        </p>
+        {/* Dynamic Content */}
+        <div className='about-text-wrapper'>
+          {isImpressumActive ? (
+            <div className='impressum-content'>
+              <h3>Impressum</h3>
+              <br />
+              <b>Vertreten durch:</b>
+              <p>
+                Mohammed Hawrami<br />
+                Sankt-Veit-Str. 26<br />
+                81673 München
+              </p>
+              <br />
+              <b>Kontakt:</b>
+              <br />
+              <b>Telefon:</b> (089) 5591 6536<br />
+              <b>E-Mail:</b> info@alpine-dev.de<br />
+              <b>Rechtsform:</b> Einzelunternehmen<br />
+              Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed
+              Hawrami
+            </div>
+          ) : (
+            <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
+              {data?.text}
+            </p>
+          )}
+        </div>
       </div>
     </Box>
   );
