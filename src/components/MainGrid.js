@@ -80,6 +80,7 @@ export default function MainGrid({ data = {} }) {
               data={data?.socials}
               timeline={tl}
               onImpressumClick={toggleImpressum}
+              isImpressumActive={isImpressumActive}
             />
           </div>
         </div>
