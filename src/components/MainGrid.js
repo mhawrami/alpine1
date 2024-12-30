@@ -24,18 +24,29 @@ export default function MainGrid({ data = {} }) {
     setIsImpressumActive(!isImpressumActive);
   };
 
-  // Impressum content
+  // Impressum content styled with Tailwind
   const impressumDetails = `
-    <h3>Impressum</h3><br><br>
-    <b>Vertreten durch:</b><br>
-    <p>Mohammed Hawrami<br>
-    Sankt-Veit-Str. 26<br>
-    81673 München</p><br><br>
-    <b>Kontakt:</b><br>
-    <b>Telefon:</b> (089) 5591 6536<br>
-    <b>E-Mail:</b> info@alpine-dev.de<br><br>
-    <b>Rechtsform:</b> Einzelunternehmen<br>
-    Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed Hawrami
+    <div class="p-4">
+      <h3 class="text-xl font-bold mb-4">Impressum</h3>
+      <div class="mb-4">
+        <b class="block text-sm font-medium">Vertreten durch:</b>
+        <p class="text-sm">Mohammed Hawrami<br>Sankt-Veit-Str. 26<br>81673 München</p>
+      </div>
+      <div class="mb-4">
+        <b class="block text-sm font-medium">Kontakt:</b>
+        <p class="text-sm">
+          <b>Telefon:</b> (089) 5591 6536<br>
+          <b>E-Mail:</b> info@alpine-dev.de
+        </p>
+      </div>
+      <div>
+        <b class="block text-sm font-medium">Rechtsform:</b>
+        <p class="text-sm">
+          Einzelunternehmen<br>
+          Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed Hawrami
+        </p>
+      </div>
+    </div>
   `;
 
   return (
