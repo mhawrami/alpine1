@@ -33,6 +33,7 @@ export default function About({ data, timeline }) {
           )}
         </div>
 
+        {/* Dynamic Text */}
         <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
           {data?.text}
         </p>
