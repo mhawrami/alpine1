@@ -27,7 +27,6 @@ export default function MainGrid({ data = {} }) {
   // Impressum content styled with Tailwind
   const impressumDetails = `
     <div class="p-4">
-      <h3 class="text-xl font-bold mb-4">Impressum</h3>
       <div class="mb-4">
         <b class="block text-sm font-medium">Vertreten durch:</b>
         <p class="text-sm">Mohammed Hawrami<br>Sankt-Veit-Str. 26<br>81673 München</p>
