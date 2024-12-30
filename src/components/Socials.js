@@ -1,6 +1,6 @@
 import Box from './Box';
 
-export default function Socials({ data, timeline }) {
+export default function Socials({ data, timeline, onImpressumClick }) {
   const contentAnimation = delay => {
     timeline.from(
       '.social-link',
@@ -20,9 +20,17 @@ export default function Socials({ data, timeline }) {
           <a
             key={link.title}
             href={link.url}
-            target='_blank'
-            rel='noopener noreferrer'
+            target={link.title === 'Impressum' ? undefined : '_blank'}
+            rel={link.title === 'Impressum' ? undefined : 'noopener noreferrer'}
             className='flex overflow-hidden text-base font-medium uppercase leading-[100%]'
+            onClick={
+              link.title === 'Impressum'
+                ? e => {
+                    e.preventDefault();
+                    onImpressumClick();
+                  }
+                : undefined
+            }
           >
             <span className='social-link inline-block'>{link.title}</span>
           </a>
