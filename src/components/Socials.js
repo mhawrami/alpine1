@@ -1,6 +1,6 @@
 import Box from './Box';
 
-export default function Socials({ data, timeline, onImpressumClick }) {
+export default function Socials({ data, timeline, onImpressumClick, isImpressumActive }) {
   const contentAnimation = delay => {
     timeline.from(
       '.social-link',
@@ -32,7 +32,9 @@ export default function Socials({ data, timeline, onImpressumClick }) {
                 : undefined
             }
           >
-            <span className='social-link inline-block'>{link.title}</span>
+            <span className='social-link inline-block'>
+              {link.title === 'Impressum' && isImpressumActive ? 'Über mich' : link.title}
+            </span>
           </a>
         ))}
       </div>
