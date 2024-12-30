@@ -16,6 +16,14 @@ export default function MainGrid({ data = {} }) {
   const [loaded, setLoaded] = useState(DISABLE_LOADING_ANIMATION);
   const tl = useGlobalTimeline(loaded);
 
+  // State for toggling Impressum text
+  const [isImpressumActive, setIsImpressumActive] = useState(false);
+
+  // Function to toggle Impressum state
+  const toggleImpressum = () => {
+    setIsImpressumActive(!isImpressumActive);
+  };
+
   return (
     <>
       {!DISABLE_LOADING_ANIMATION && (
@@ -39,7 +47,16 @@ export default function MainGrid({ data = {} }) {
           </div>
 
           <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:col-span-full'>
-            <About data={data?.about} timeline={tl} />
+            {/* Pass toggled text to About component */}
+            <About
+              data={{
+                ...data?.about,
+                text: isImpressumActive
+                  ? "This is the Impressum content."
+                  : data?.about?.text,
+              }}
+              timeline={tl}
+            />
           </div>
 
           <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:hidden'>
@@ -58,7 +75,12 @@ export default function MainGrid({ data = {} }) {
           </div>
 
           <div className='col-span-4 row-span-1 max-lg:col-span-full max-lg:min-h-[5rem]'>
-            <Socials data={data?.socials} timeline={tl} />
+            {/* Pass toggle handler to Socials */}
+            <Socials
+              data={data?.socials}
+              timeline={tl}
+              onImpressumClick={toggleImpressum}
+            />
           </div>
         </div>
       </div>
