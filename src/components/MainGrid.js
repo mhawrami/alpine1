@@ -35,9 +35,8 @@ export default function MainGrid({ data = {} }) {
   // Impressum content styled with Tailwind
   const impressumDetails = `
     <div class="p-4">
-      <h3 class="text-xl font-bold mb-4">Impressum</h3>
       <div class="mb-4">
-        <b class="block text-sm font-medium">Vertreten durch:</b>
+        <b class="block text-sm font-medium">Alpine Development,</b><span> vertreten durch:</span>
         <p class="text-sm">Mohammed Hawrami<br>Sankt-Veit-Str. 26<br>81673 München</p>
       </div>
       <div class="mb-4">
@@ -45,13 +44,6 @@ export default function MainGrid({ data = {} }) {
         <p class="text-sm">
           <b>Telefon:</b> (089) 5591 6536<br>
           <b>E-Mail:</b> info@alpine-dev.de
-        </p>
-      </div>
-      <div>
-        <b class="block text-sm font-medium">Rechtsform:</b>
-        <p class="text-sm">
-          Einzelunternehmen<br>
-          Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed Hawrami
         </p>
       </div>
     </div>
