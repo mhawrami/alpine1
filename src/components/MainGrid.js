@@ -39,9 +39,7 @@ export default function MainGrid({ data = {} }) {
         </p>
       </div>
       <div>
-        <b class="block text-sm font-medium">Rechtsform:</b>
         <p class="text-sm">
-          Einzelunternehmen<br>
           Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV: Mohammed Hawrami
         </p>
       </div>
