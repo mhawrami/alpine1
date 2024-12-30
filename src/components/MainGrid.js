@@ -36,7 +36,7 @@ export default function MainGrid({ data = {} }) {
   const impressumDetails = `
     <div class="p-4">
       <div class="mb-4">
-        <b class="block text-sm font-medium">Alpine Development,</b><span> vertreten durch:</span>
+        <b class="block text-sm font-medium">Alpine Development, vertreten durch:</b>
         <p class="text-sm">Mohammed Hawrami<br>Sankt-Veit-Str. 26<br>81673 München</p>
       </div>
       <div class="mb-4">
