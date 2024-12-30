@@ -37,7 +37,7 @@ export default function About({ data, timeline, isImpressumActive }) {
         <div className='about-text-wrapper'>
   {isImpressumActive ? (
     <div
-      className='impressum-content bg-gray-100 p-4 rounded-lg border border-gray-300 leading-relaxed'
+      className='impressum-content leading-relaxed'
       dangerouslySetInnerHTML={{ __html: data?.text }}>
         </div>
           ) : (
