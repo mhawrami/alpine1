@@ -16,23 +16,17 @@ export default function MainGrid({ data = {} }) {
   const [loaded, setLoaded] = useState(DISABLE_LOADING_ANIMATION);
   const tl = useGlobalTimeline(loaded);
 
-  // State for toggling Impressum text
   const [isImpressumActive, setIsImpressumActive] = useState(false);
 
-  // Ref for the About section
   const aboutRef = useRef(null);
 
-  // Function to toggle Impressum state
   const toggleImpressum = () => {
     setIsImpressumActive(!isImpressumActive);
-
-    // Scroll to the About section
     if (aboutRef.current) {
       aboutRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
-  // Impressum content styled with Tailwind
   const impressumDetails = `
     <div class="p-4">
       <div class="mb-4">
@@ -55,13 +49,11 @@ export default function MainGrid({ data = {} }) {
         <LoadingBar onFinish={() => setLoaded(true)} />
       )}
 
-      {/* Bento Grid */}
       <div className='grid h-screen max-h-[75rem] min-h-[50rem] grid-cols-12 grid-rows-10 gap-4 p-4 max-lg:h-auto max-lg:max-h-none max-lg:grid-rows-none max-lg:py-6'>
         <div className='col-span-full row-span-1'>
           <Nav data={data?.nav} timeline={tl} />
         </div>
 
-        {/* Left column */}
         <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
           <div className='col-span-5 row-span-5 max-lg:col-span-8 max-md:col-span-full'>
             <Intro data={data?.intro} timeline={tl} />
@@ -72,10 +64,9 @@ export default function MainGrid({ data = {} }) {
           </div>
 
           <div
-            ref={aboutRef} // Attach the ref to the About section
+            ref={aboutRef}
             className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:col-span-full'
           >
-            {/* Pass toggled Impressum content to About component */}
             <About
               data={{
                 ...data?.about,
@@ -91,7 +82,6 @@ export default function MainGrid({ data = {} }) {
           </div>
         </div>
 
-        {/* Right column */}
         <div className='col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
           <div className='col-span-4 row-span-8 max-lg:col-span-full'>
             <Work data={data?.work} timeline={tl} />
@@ -102,7 +92,6 @@ export default function MainGrid({ data = {} }) {
           </div>
 
           <div className='col-span-4 row-span-1 max-lg:col-span-full max-lg:min-h-[5rem]'>
-            {/* Pass toggle handler to Socials */}
             <Socials
               data={data?.socials}
               timeline={tl}
