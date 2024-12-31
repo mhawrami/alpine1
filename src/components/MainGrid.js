@@ -33,7 +33,7 @@ export default function MainGrid({ data = {} }) {
   };
 
   // Impressum content styled with Tailwind
-  const impressumDetails = 
+  const impressumDetails = `
     <div class="p-4">
       <div class="mb-4">
         <b class="block text-sm font-medium">Alpine Development, vertreten durch:</b>
@@ -47,7 +47,7 @@ export default function MainGrid({ data = {} }) {
         </p>
       </div>
     </div>
-  ;
+  `;
 
   return (
     <>

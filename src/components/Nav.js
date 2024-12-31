@@ -1,6 +1,6 @@
 import Box from './Box';
 
-export default function Nav({ data, timeline, onLanguageChange }) {
+export default function Nav({ data, timeline }) {
   const contentAnimation = delay => {
     timeline
       .from('.logo', { x: -30, opacity: 0 }, delay + 0.3)
@@ -31,19 +31,6 @@ export default function Nav({ data, timeline, onLanguageChange }) {
               </button>
             </a>
           ))}
-          {/* Sprachumschalter */}
-          <div className='language-switcher flex items-center gap-2'>
-            <button
-              onClick={() => onLanguageChange('en')}
-              className='rounded-lg border border-secondary px-3 py-2 font-medium uppercase text-primary'>
-              EN
-            </button>
-            <button
-              onClick={() => onLanguageChange('de')}
-              className='rounded-lg border border-secondary px-3 py-2 font-medium uppercase text-primary'>
-              DE
-            </button>
-          </div>
         </div>
       </nav>
     </Box>
