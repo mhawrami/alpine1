@@ -1,9 +1,12 @@
 import Box from './Box';
 import { useContext } from 'react';
-import { LanguageContext } from '@/context/LanguageContext';
+import { LanguageContext, useLocalizedData } from '@/context/LanguageContext'; // Hook importieren
 
-export default function Nav({ data, timeline }) {
+export default function Nav({ timeline }) {
   const { language, setLanguage } = useContext(LanguageContext);
+
+  // Lokalisierte Daten aus dem Kontext abrufen
+  const data = useLocalizedData('nav');
 
   const contentAnimation = delay => {
     timeline
