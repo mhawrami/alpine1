@@ -1,5 +1,6 @@
 import { DM_Sans, DM_Serif_Display } from 'next/font/google';
 import Global from '@/components/Global';
+import { LanguageProvider } from '@/context/LanguageContext'; // Importiere LanguageProvider
 import './globals.css';
 
 export const metadata = {
@@ -30,8 +31,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${fontHeading.variable} ${fontBody.variable} antialiased`}
       >
-        <Global />
-        {children}
+        <LanguageProvider> {/* Umhülle den gesamten Inhalt */}
+          <Global />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
