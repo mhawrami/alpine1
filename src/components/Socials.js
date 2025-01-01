@@ -1,6 +1,10 @@
 import Box from './Box';
+import { useLocalizedData } from '@/context/LanguageContext'; // Hook importieren
 
-export default function Socials({ data, timeline, onImpressumClick, isImpressumActive }) {
+export default function Socials({ timeline, onImpressumClick, isImpressumActive }) {
+  // Lokalisierte Daten abrufen
+  const data = useLocalizedData('socials');
+
   const contentAnimation = delay => {
     timeline.from(
       '.social-link',
