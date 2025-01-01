@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Box from './Box';
+import { useLocalizedData } from '@/context/LanguageContext'; // Importiere den Hook
 
-export default function About({ data, timeline, isImpressumActive }) {
+export default function About({ timeline, isImpressumActive }) {
+  const data = useLocalizedData('about'); // Hole die lokalisierten Daten für "about"
+
   const contentAnimation = delay => {
     const offset = 0.3;
     timeline
@@ -24,29 +27,4 @@ export default function About({ data, timeline, isImpressumActive }) {
         <div className='size-[2.75rem]'>
           {data?.icon && (
             <Image
-              src={data.icon}
-              width={48}
-              height={48}
-              alt='disk'
-              className='about-icon size-full'
-            />
-          )}
-        </div>
-
-        {/* Dynamic Content */}
-        <div className='about-text-wrapper'>
-  {isImpressumActive ? (
-    <div
-      className='impressum-content leading-relaxed'
-      dangerouslySetInnerHTML={{ __html: data?.text }}>
-        </div>
-          ) : (
-            <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
-              {data?.text}
-            </p>
-          )}
-        </div>
-      </div>
-    </Box>
-  );
-}
+         
