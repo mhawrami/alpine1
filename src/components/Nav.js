@@ -1,10 +1,18 @@
 import Box from './Box';
+import { useContext } from 'react';
+import { LanguageContext } from '@/context/LanguageContext';
 
 export default function Nav({ data, timeline }) {
+  const { language, setLanguage } = useContext(LanguageContext);
+
   const contentAnimation = delay => {
     timeline
       .from('.logo', { x: -30, opacity: 0 }, delay + 0.3)
       .from('.cta', { x: 30, opacity: 0 }, delay + 0.3);
+  };
+
+  const handleLanguageChange = lang => {
+    setLanguage(lang);
   };
 
   return (
@@ -31,6 +39,25 @@ export default function Nav({ data, timeline }) {
               </button>
             </a>
           ))}
+          {/* Sprachumschalter */}
+          <div className='language-switcher flex items-center gap-2'>
+            <button
+              className={`rounded-full px-3 py-1 text-sm font-medium ${
+                language === 'de' ? 'bg-primary text-secondary' : 'bg-secondary text-primary'
+              }`}
+              onClick={() => handleLanguageChange('de')}
+            >
+              DE
+            </button>
+            <button
+              className={`rounded-full px-3 py-1 text-sm font-medium ${
+                language === 'en' ? 'bg-primary text-secondary' : 'bg-secondary text-primary'
+              }`}
+              onClick={() => handleLanguageChange('en')}
+            >
+              EN
+            </button>
+          </div>
         </div>
       </nav>
     </Box>
