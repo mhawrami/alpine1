@@ -22,10 +22,14 @@ export default function Nav({ data, timeline }) {
       callbackAnimation={contentAnimation}
     >
       <nav className='flex size-full items-center justify-between max-lg:gap-4 max-md:flex-col max-md:justify-center'>
+        {/* Logo */}
         <div className='logo overflow-hidden font-heading text-2xl font-normal'>
           <span className='block'>{data?.logo}</span>
         </div>
+
+        {/* Call-to-Action Buttons und Sprachumschalter */}
         <div className='cta flex items-center gap-4'>
+          {/* Links */}
           {data?.links?.map(link => (
             <a
               key={link.title}
@@ -39,6 +43,7 @@ export default function Nav({ data, timeline }) {
               </button>
             </a>
           ))}
+
           {/* Sprachumschalter */}
           <div className='language-switcher flex items-center gap-2'>
             <button
