@@ -10,14 +10,24 @@ import Socials from '@/components/Socials';
 import Work from '@/components/Work';
 import { useGlobalTimeline } from '@/hooks/useAnimation';
 import LoadingBar from '@/components/LoadingBar';
+import { useLocalizedData } from '@/context/LanguageContext'; // Importiere den Hook
 import { DISABLE_LOADING_ANIMATION } from '@/config';
 
-export default function MainGrid({ data = {} }) {
+export default function MainGrid() {
   const [loaded, setLoaded] = useState(DISABLE_LOADING_ANIMATION);
   const tl = useGlobalTimeline(loaded);
 
   // State for toggling Impressum text
   const [isImpressumActive, setIsImpressumActive] = useState(false);
+
+  // Lokalisierte Daten holen
+  const navData = useLocalizedData('nav');
+  const introData = useLocalizedData('intro');
+  const portraitData = useLocalizedData('portrait');
+  const aboutData = useLocalizedData('about');
+  const contactData = useLocalizedData('contact');
+  const workData = useLocalizedData('work');
+  const socialsData = useLocalizedData('socials');
 
   // Ref for the About section
   const aboutRef = useRef(null);
@@ -58,17 +68,17 @@ export default function MainGrid({ data = {} }) {
       {/* Bento Grid */}
       <div className='grid h-screen max-h-[75rem] min-h-[50rem] grid-cols-12 grid-rows-10 gap-4 p-4 max-lg:h-auto max-lg:max-h-none max-lg:grid-rows-none max-lg:py-6'>
         <div className='col-span-full row-span-1'>
-          <Nav data={data?.nav} timeline={tl} />
+          <Nav data={navData} timeline={tl} />
         </div>
 
         {/* Left column */}
         <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
           <div className='col-span-5 row-span-5 max-lg:col-span-8 max-md:col-span-full'>
-            <Intro data={data?.intro} timeline={tl} />
+            <Intro data={introData} timeline={tl} />
           </div>
 
           <div className='col-span-3 row-span-5 max-lg:col-span-4 max-md:col-span-full'>
-            <Portrait data={data?.portrait} timeline={tl} />
+            <Portrait data={portraitData} timeline={tl} />
           </div>
 
           <div
@@ -78,8 +88,8 @@ export default function MainGrid({ data = {} }) {
             {/* Pass toggled Impressum content to About component */}
             <About
               data={{
-                ...data?.about,
-                text: isImpressumActive ? impressumDetails : data?.about?.text,
+                ...aboutData,
+                text: isImpressumActive ? impressumDetails : aboutData?.text,
               }}
               timeline={tl}
               isImpressumActive={isImpressumActive}
@@ -87,24 +97,24 @@ export default function MainGrid({ data = {} }) {
           </div>
 
           <div className='col-span-4 row-span-4 max-lg:col-span-6 max-lg:min-h-[20rem] max-md:hidden'>
-            <Contact data={data?.contact} timeline={tl} />
+            <Contact data={contactData} timeline={tl} />
           </div>
         </div>
 
         {/* Right column */}
         <div className='col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
           <div className='col-span-4 row-span-8 max-lg:col-span-full'>
-            <Work data={data?.work} timeline={tl} />
+            <Work data={workData} timeline={tl} />
           </div>
 
           <div className='col-span-full hidden max-lg:min-h-[20rem] max-md:block'>
-            <Contact data={data?.contact} timeline={tl} />
+            <Contact data={contactData} timeline={tl} />
           </div>
 
           <div className='col-span-4 row-span-1 max-lg:col-span-full max-lg:min-h-[5rem]'>
             {/* Pass toggle handler to Socials */}
             <Socials
-              data={data?.socials}
+              data={socialsData}
               timeline={tl}
               onImpressumClick={toggleImpressum}
               isImpressumActive={isImpressumActive}
