@@ -69,6 +69,11 @@
         "title": "Immobilien",
         "url": "https://bb-immobilien.gmbh/",
         "media": "/work7.jpg"
+      },
+       {
+        "title": "Autoankauf",
+        "url": "https://hrpulse.io/",
+        "media": "/work8.jpg"
       }
     ],
     "linkIcon": "/icons/arrow-icon-black.svg"  
@@ -83,7 +88,7 @@
       },
       {
         "title": "Instagram",
-        "url": "https://www.instagram.com/moexxoe/"
+        "url": "https://www.instagram.com/alpine.development/"
       },
       {
         "title": "Impressum",
