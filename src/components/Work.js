@@ -24,10 +24,10 @@ export default function Work({ data, timeline }) {
       className='-translate-x-full scale-0 py-0 opacity-0'
       callbackAnimation={contentAnimation}
     >
-      <div className='relative z-10 size-full overflow-hidden'>
-        <div className='mb-8'>
-          <h2 className='font-heading text-4xl font-normal text-white'>Portfolio</h2>
-          <div className='mt-2 h-0.5 w-16 bg-gradient-to-r from-white to-transparent'></div>
+      <div className='relative z-10 size-full overflow-hidden px-6'>
+        <div className='mb-12 mt-6 text-center'>
+          <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549' }}>Portfolio</h2>
+          <div className='mx-auto mt-4 h-px w-24 bg-gray-400/50'></div>
         </div>
         <div
           className='hide-scrollbar flex h-[calc(100%-4rem)] flex-col overflow-y-auto max-lg:overflow-y-visible'
