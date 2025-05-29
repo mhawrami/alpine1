@@ -25,10 +25,10 @@ export default function Work({ data, timeline }) {
       callbackAnimation={contentAnimation}
     >
       <div className='relative z-10 size-full overflow-hidden'>
-        <h2 className='mb-6 font-heading text-3xl font-normal text-white'>
-          Portfolio
-          <span className='ml-3 text-xl text-gray-400'>Portfolio</span>
-        </h2>
+        <div className='mb-8'>
+          <h2 className='font-heading text-4xl font-normal text-white'>Portfolio</h2>
+          <div className='mt-2 h-0.5 w-16 bg-gradient-to-r from-white to-transparent'></div>
+        </div>
         <div
           className='hide-scrollbar flex h-[calc(100%-4rem)] flex-col overflow-y-auto max-lg:overflow-y-visible'
           ref={containerRef}
