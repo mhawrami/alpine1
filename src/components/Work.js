@@ -25,7 +25,7 @@ export default function Work({ data, timeline }) {
       callbackAnimation={contentAnimation}
     >
       <div className='relative z-10 size-full overflow-hidden'>
-        <div className='mb-10 mt-8 px-8'>
+        <div className='mb-6 mt-8 px-8'>
           <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549', letterSpacing: '0.5px' }}>
             Portfolio
           </h2>
