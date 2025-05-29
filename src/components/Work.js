@@ -25,11 +25,13 @@ export default function Work({ data, timeline }) {
       callbackAnimation={contentAnimation}
     >
       <div className='relative z-10 size-full overflow-hidden'>
-        <div className='mb-6 mt-8 px-8'>
-          <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549', letterSpacing: '0.5px' }}>
-            Portfolio
-          </h2>
-          <div className='mt-3 h-px w-20 bg-gray-400/50'></div>
+        <div className='mb-6 mt-8'>
+          <div className='px-8'>
+            <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549', letterSpacing: '0.5px' }}>
+              Portfolio
+            </h2>
+            <div className='mt-3 h-px w-20 bg-gray-400/50'></div>
+          </div>
         </div>
         <div
           className='hide-scrollbar flex h-[calc(100%-4rem)] flex-col overflow-y-auto max-lg:overflow-y-visible'
