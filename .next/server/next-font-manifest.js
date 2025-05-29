@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/moe/Documents/GitHub/alpine1/src/app/layout":["static/media/7e6a2e30184bb114-s.p.woff2","static/media/8679c800f1e60000-s.p.woff2","static/media/951e9a9740ad3b55-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
