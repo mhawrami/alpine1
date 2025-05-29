@@ -25,8 +25,12 @@ export default function Work({ data, timeline }) {
       callbackAnimation={contentAnimation}
     >
       <div className='relative z-10 size-full overflow-hidden'>
+        <h2 className='mb-6 font-heading text-3xl font-normal text-white'>
+          Portfolio
+          <span className='ml-3 text-xl text-gray-400'>Portfolio</span>
+        </h2>
         <div
-          className='hide-scrollbar flex h-full flex-col overflow-y-auto max-lg:overflow-y-visible'
+          className='hide-scrollbar flex h-[calc(100%-4rem)] flex-col overflow-y-auto max-lg:overflow-y-visible'
           ref={containerRef}
         >
           {data?.projects?.map((project, index) => (
