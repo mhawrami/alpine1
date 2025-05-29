@@ -19,7 +19,7 @@
   },
 
   "about": {
-    "text": "Ich bin Moe und dein Partner für alles rund um Webentwicklung, Design und IT-Consulting. Mein Ziel ist es, dich mit modernen und nachhaltigen IT-Lösungen zu unterstützen, damit dein Business auf die nächste Stufe gehoben wird",
+    "text": "Ich bin Moe und dein Partner für alles rund um Entwicklung, UI/UX und IT-Consulting. Mein Ziel ist es, dich mit modernen und nachhaltigen IT-Lösungen zu unterstützen, damit dein Business auf die nächste Stufe gehoben wird.",
     "icon": "/icons/about-icon.svg"
   },
 
@@ -33,48 +33,74 @@
   "work": {
     "projects": [
       {
-        "title": "Praxis",
+        "title": "Forum Starke Knochen",
         "url": "https://forumstarkeknochen.de/",
         "media": "/work1.jpg"
       },
       {
-        "title": "Fotografie",
+        "title": "Amiel Pretsch",
         "url": "https://amielpretsch.com",
         "media": "/work2.jpg"
 
       },
       {
-        "title": "Logistik & Reinigung",
+        "title": "Ebrahous Services",
         "url": "https://ebrahous.de",
         "media": "/work3.jpg"
 
       },
       {
-        "title": "Taxiservices",
+        "title": "Oslo Prime",
         "url": "https://osloprime.de",
         "media": "/work4.jpg"
 
       },
       {
-        "title": "Bodenbelag",
+        "title": "Norkauer GmbH",
         "url": "https://norkauer.de",
         "media": "/work5.jpg"
       },
       {
-        "title": "Kinderhilfswerk",
+        "title": "Planet Children Kinderhilfswerk,
         "url": "https://planet-children.de",
         "media": "/work6.jpg"
       },
       {
-        "title": "Immobilien",
-        "url": "https://bb-immobilien.gmbh/",
+        "title": "BB Immobilien",
+        "url": "https://bb.immo/",
         "media": "/work7.jpg"
       },
             {
-        "title": "Autoankauf",
-        "url": "https://hrpulse.io/",
+        "title": "Hallertauer Werkstatt",
+        "url": "https://hallertauer-werkstatt.de/",
         "media": "/work8.jpg"
-      }
+      },
+      {
+        "title": "Cystovy - PCOS Begleiter",
+        "url": "https://cystovy.de",
+        "media": "/work9.jpg"
+      },
+      {
+        "title": "Diyar Restaurant",
+        "url": "https://diyar.de",
+        "media": "/work10.jpg"
+      },
+      {
+        "title": "Fachanwältin Bayar",
+        "url": "https://beratung-bayar.de",
+        "media": "/work11.jpg"
+      },
+      {
+        "title": "Sun-Shine Gebäudedienstleistung",
+        "url": "https://sun-shine-gebaeudedienstleistung.de/",
+        "media": "/work12.jpg"
+      },
+      {
+        "title": "Schreinerei Ott",
+        "url": "https://ott-schreinerei.de/",
+        "media": "/work13.jpg"
+      },
+      
     ],
     "linkIcon": "/icons/arrow-icon-black.svg"  
   },
