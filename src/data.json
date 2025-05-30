@@ -61,7 +61,7 @@
         "media": "/work5.jpg"
       },
       {
-        "title": "Planet Children Kinderhilfswerk,
+        "title": "Planet Children Kinderhilfswerk",
         "url": "https://planet-children.de",
         "media": "/work6.jpg"
       },
@@ -99,10 +99,9 @@
         "title": "Schreinerei Ott",
         "url": "https://ott-schreinerei.de/",
         "media": "/work13.jpg"
-      },
-      
+      }
     ],
-    "linkIcon": "/icons/arrow-icon-black.svg"  
+    "linkIcon": "/icons/arrow-icon-black.svg"
   },
 
  
