@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Box from './Box';
 
 export default function Work({ data, timeline }) {
+  console.log('Work component data:', data); // Debug log
   const contentAnimation = (delay) => {
     if (!timeline) return;
     
