@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Box from './Box';
+// Temporarily disable animations
+// import Box from './Box';
+
+// Simple Box replacement for testing
+const Box = ({ children, className = '' }) => (
+  <div className={className}>
+    {children}
+  </div>
+);
 
 // Debug: List of available work images
 const availableWorkImages = [
@@ -139,13 +147,16 @@ export default function Work({ data, timeline }) {
       }, delay);
   };
 
+  // Debug: Log when component renders
+  console.log('Rendering Work component', { 
+    isMounted, 
+    hasProjects: data?.projects?.length > 0,
+    projectsCount: data?.projects?.length
+  });
+
   if (!isMounted) {
     return (
-      <Box
-        timeline={timeline}
-        className='-translate-x-full scale-0 py-0 opacity-0'
-        callbackAnimation={contentAnimation}
-      >
+      <Box className='py-0'>
         <div className='relative z-10 size-full overflow-hidden'>
           <div className='mb-8 mt-8'>
             <div className='px-8'>
@@ -164,12 +175,9 @@ export default function Work({ data, timeline }) {
   }
 
   if (!data?.projects?.length) {
+    console.log('No projects available in data');
     return (
-      <Box
-        timeline={timeline}
-        className='-translate-x-full scale-0 py-0 opacity-0'
-        callbackAnimation={contentAnimation}
-      >
+      <Box className='py-0'>
         <div className='relative z-10 size-full overflow-hidden'>
           <div className='mb-8 mt-8'>
             <div className='px-8'>
@@ -187,11 +195,11 @@ export default function Work({ data, timeline }) {
     );
   }
 
+  console.log('Rendering projects:', data.projects);
+  
   return (
     <Box
-      timeline={timeline}
-      className='-translate-x-full scale-0 py-0 opacity-0'
-      callbackAnimation={contentAnimation}
+      className='py-0'
     >
       <div className='relative z-10 size-full overflow-hidden'>
         <div className='mb-8 mt-8'>
@@ -205,13 +213,16 @@ export default function Work({ data, timeline }) {
         
         <div className='hide-scrollbar h-[calc(100%-6rem)] overflow-y-auto px-8 pb-12 max-lg:overflow-y-visible'>
           <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10'>
-            {data.projects.map((project, index) => (
-              <ProjectItem 
-                key={`${project.title}-${index}`}
-                project={project}
-                index={index}
-              />
-            ))}
+            {data.projects.map((project, index) => {
+              console.log('Rendering project:', project.title);
+              return (
+                <ProjectItem 
+                  key={`${project.title}-${index}`}
+                  project={project}
+                  index={index}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
