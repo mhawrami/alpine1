@@ -2,10 +2,27 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Box from './Box';
 
+// Debug: List of available work images
+const availableWorkImages = [
+  '/work1.jpg',
+  '/work2.jpg',
+  '/work3.jpg',
+  '/work4.jpg',
+  '/work5.jpg',
+  '/work6.jpg',
+  '/work7.jpg',
+  '/work8.jpg'
+];
+
 function ProjectItem({ project, index }) {
   const [isHovered, setIsHovered] = useState(false);
 
   if (!project?.url) return null;
+
+  // Verify the media exists
+  const mediaSrc = availableWorkImages.includes(project.media) 
+    ? project.media 
+    : availableWorkImages[0]; // Fallback to first image if not found
 
   try {
     const url = new URL(project.url);
@@ -20,7 +37,7 @@ function ProjectItem({ project, index }) {
         {/* Project Thumbnail */}
         <div className='relative aspect-[16/9] w-full overflow-hidden'>
           <Image
-            src={project.media}
+            src={mediaSrc}
             alt={project.title}
             fill
             className='h-full w-full transform object-cover transition-transform duration-700 group-hover:scale-105'
@@ -28,6 +45,10 @@ function ProjectItem({ project, index }) {
             quality={85}
             placeholder='blur'
             blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAExgF4q6tRTQAAAABJRU5ErkJggg=='
+            onError={(e) => {
+              console.error(`Failed to load image: ${mediaSrc}`);
+              e.target.src = availableWorkImages[0]; // Fallback to first image on error
+            }}
           />
           
           {/* Overlay */}
@@ -89,9 +110,20 @@ function ProjectItem({ project, index }) {
 export default function Work({ data, timeline }) {
   const [isMounted, setIsMounted] = useState(false);
   
+  // Log whenever data changes
   useEffect(() => {
+    console.log('Work component data updated:', {
+      hasData: !!data,
+      dataKeys: data ? Object.keys(data) : [],
+      projects: data?.projects,
+      projectsCount: data?.projects?.length,
+      firstProject: data?.projects?.[0]
+    });
+    
+    // Log available work images
+    console.log('Available work images:', availableWorkImages);
+    
     setIsMounted(true);
-    console.log('Work component mounted with data:', data);
   }, [data]);
 
   const contentAnimation = (delay) => {

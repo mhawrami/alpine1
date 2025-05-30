@@ -41,19 +41,16 @@
         "title": "Amiel Pretsch",
         "url": "https://amielpretsch.com",
         "media": "/work2.jpg"
-
       },
       {
         "title": "Ebrahous Services",
         "url": "https://ebrahous.de",
         "media": "/work3.jpg"
-
       },
       {
         "title": "Oslo Prime",
         "url": "https://osloprime.de",
         "media": "/work4.jpg"
-
       },
       {
         "title": "Norkauer GmbH",
@@ -70,35 +67,10 @@
         "url": "https://bb.immo/",
         "media": "/work7.jpg"
       },
-            {
+      {
         "title": "Hallertauer Werkstatt",
         "url": "https://hallertauer-werkstatt.de/",
         "media": "/work8.jpg"
-      },
-      {
-        "title": "Cystovy - PCOS Begleiter",
-        "url": "https://cystovy.de",
-        "media": "/work9.jpg"
-      },
-      {
-        "title": "Diyar Restaurant",
-        "url": "https://diyar.de",
-        "media": "/work10.jpg"
-      },
-      {
-        "title": "Fachanwältin Bayar",
-        "url": "https://beratung-bayar.de",
-        "media": "/work11.jpg"
-      },
-      {
-        "title": "Sun-Shine Gebäudedienstleistung",
-        "url": "https://sun-shine-gebaeudedienstleistung.de/",
-        "media": "/work12.jpg"
-      },
-      {
-        "title": "Schreinerei Ott",
-        "url": "https://ott-schreinerei.de/",
-        "media": "/work13.jpg"
       }
     ],
     "linkIcon": "/icons/arrow-icon-black.svg"
