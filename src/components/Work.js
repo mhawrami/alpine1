@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-// Temporarily disable animations
-// import Box from './Box';
-
-// Simple Box replacement for testing
-const Box = ({ children, className = '' }) => (
-  <div className={className}>
-    {children}
-  </div>
-);
+import Box from './Box';
 
 // Debug: List of available work images
 const availableWorkImages = [
@@ -156,7 +148,11 @@ export default function Work({ data, timeline }) {
 
   if (!isMounted) {
     return (
-      <Box className='py-0'>
+      <Box
+        timeline={timeline}
+        className='-translate-x-full scale-0 py-0 opacity-0'
+        callbackAnimation={contentAnimation}
+      >
         <div className='relative z-10 size-full overflow-hidden'>
           <div className='mb-8 mt-8'>
             <div className='px-8'>
@@ -177,7 +173,11 @@ export default function Work({ data, timeline }) {
   if (!data?.projects?.length) {
     console.log('No projects available in data');
     return (
-      <Box className='py-0'>
+      <Box
+        timeline={timeline}
+        className='-translate-x-full scale-0 py-0 opacity-0'
+        callbackAnimation={contentAnimation}
+      >
         <div className='relative z-10 size-full overflow-hidden'>
           <div className='mb-8 mt-8'>
             <div className='px-8'>
@@ -199,7 +199,9 @@ export default function Work({ data, timeline }) {
   
   return (
     <Box
-      className='py-0'
+      timeline={timeline}
+      className='-translate-x-full scale-0 py-0 opacity-0'
+      callbackAnimation={contentAnimation}
     >
       <div className='relative z-10 size-full overflow-hidden'>
         <div className='mb-8 mt-8'>
@@ -211,8 +213,8 @@ export default function Work({ data, timeline }) {
           </div>
         </div>
         
-        <div className='hide-scrollbar h-[calc(100%-6rem)] overflow-y-auto px-8 pb-12 max-lg:overflow-y-visible'>
-          <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10'>
+        <div className='hide-scrollbar w-full overflow-y-auto px-4 pb-12 sm:px-6 lg:px-8'>
+          <div className='mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {data.projects.map((project, index) => {
               console.log('Rendering project:', project.title);
               return (
