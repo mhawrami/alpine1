@@ -56,6 +56,14 @@ function ProjectItem({ project, index }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        {/* Kunde Badge */}
+        {project.client && (
+          <div className='absolute top-3 right-3 z-20'>
+            <div className='bg-[#d8cfbc] text-[#565549] text-[10px] font-medium uppercase tracking-wider px-2 py-1 rounded-full border border-[#565549]/10'>
+              Kunde
+            </div>
+          </div>
+        )}
         {/* Project Image */}
         <div className='relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#565549]/5 to-[#d8cfbc]/5'>
           {/* Subtle gradient overlay */}
@@ -95,14 +103,7 @@ function ProjectItem({ project, index }) {
 
         {/* Project Info (Always visible) */}
         <div className='p-5 sm:p-6 flex-1 flex flex-col relative overflow-hidden'>
-          {/* Kunde Badge in Background */}
-          {project.client && (
-            <div className='absolute right-0 top-0 w-full h-full flex items-center justify-center pointer-events-none overflow-hidden'>
-              <span className='font-serif text-[100px] font-bold text-[#565549]/20 transform rotate-[-15deg] whitespace-nowrap'>
-                KUNDE
-              </span>
-            </div>
-          )}
+
           <div className='relative z-10'>
             <div className='flex items-start justify-between'>
               <h3 className='font-serif text-xl text-[#565549] leading-tight mb-2 group-hover:text-[#565549]/90 transition-colors duration-300'>
