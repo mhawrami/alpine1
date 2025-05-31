@@ -50,12 +50,12 @@ function ProjectItem({ project, index }) {
     return (
       <div 
         ref={itemRef}
-        className='group relative h-full flex flex-col bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200'
+        className='group relative h-full flex flex-col bg-[#d8cfbc] border border-[#565549]/10 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-[#565549]/20'
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Project Thumbnail */}
-        <div className='relative aspect-[4/3] w-full overflow-hidden bg-gray-50'>
+        <div className='relative aspect-[4/3] w-full overflow-hidden bg-[#565549]/10'>
           <Image
             src={mediaSrc}
             alt={project.title}
@@ -72,7 +72,7 @@ function ProjectItem({ project, index }) {
           />
           
           {/* Hover Overlay */}
-          <div className={`absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
+          <div className={`absolute inset-0 bg-[#565549]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
             <span className='inline-flex items-center text-white text-sm font-medium bg-black/60 px-3 py-1.5 rounded-full'>
               <span>View Project</span>
               <svg className='ml-1.5 w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -84,10 +84,10 @@ function ProjectItem({ project, index }) {
 
         {/* Project Info */}
         <div className='p-4 flex-1 flex flex-col'>
-          <h3 className='font-medium text-gray-900 line-clamp-2 mb-2'>{project.title}</h3>
-          <div className='mt-auto pt-2 border-t border-gray-100'>
-            <div className='flex items-center text-sm text-gray-500'>
-              <svg className='w-3.5 h-3.5 mr-1.5 flex-shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <h3 className='font-medium text-[#565549] line-clamp-2 mb-2'>{project.title}</h3>
+          <div className='mt-auto pt-3 border-t border-[#565549]/10'>
+            <div className='flex items-center text-sm text-[#565549]/80'>
+              <svg className='w-3.5 h-3.5 mr-1.5 flex-shrink-0' fill='none' stroke='#565549' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1' />
               </svg>
               <span className='truncate'>{domain}</span>
@@ -146,7 +146,7 @@ function WorkContent({ projects }) {
   }, [projects]);
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 h-full overflow-y-auto pr-2'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-y-auto pr-2'>
       {projects.map((project, index) => (
         <div 
           key={`${project.title}-${index}`}
@@ -184,19 +184,19 @@ export default function Work({ data, timeline }) {
 
   if (!data?.projects?.length) {
     return (
-      <div className='h-full flex items-center justify-center p-4'>
-        <p className='text-gray-400'>No projects available</p>
+      <div className='h-full flex items-center justify-center p-4 bg-[#d8cfbc]'>
+        <p className='text-[#565549]/70'>No projects available</p>
       </div>
     );
   }
 
   return (
-    <div className='h-full flex flex-col'>
-      <div className='mb-4'>
-        <h2 className='text-2xl font-medium text-gray-800'>
+    <div className='h-full flex flex-col bg-[#d8cfbc] p-4'>
+      <div className='mb-6'>
+        <h2 className='text-2xl font-medium text-[#565549]'>
           Portfolio
         </h2>
-        <div className='mt-2 h-px w-12 bg-gray-300'></div>
+        <div className='mt-2 h-px w-12 bg-[#565549]/30'></div>
       </div>
       
       <WorkContent projects={projects} />
