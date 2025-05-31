@@ -201,15 +201,28 @@ export default function Work({ data, timeline }) {
   
   // Use the box animation hook
   useBoxAnimation(timeline, () => {
-    // Additional animations after box appears
-    if (timeline && boxRef.current) {
-      gsap.to(boxRef.current, { 
-        opacity: 1, 
-        duration: 0.4,
-        ease: 'power2.out' 
-      });
-    }
+    // Box animation is handled by useBoxAnimation
   }, 0.7);
+  
+  // Animate the box appearance
+  useGSAP(() => {
+    if (!timeline || !boxRef.current) return;
+    
+    // Reset initial state
+    gsap.set(boxRef.current, { 
+      opacity: 0,
+      y: 20
+    });
+    
+    // Animate the box in
+    timeline.to(boxRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      delay: 0.1 // Slight delay after the box animation starts
+    });
+  }, { scope: boxRef, dependencies: [timeline] });
   
   // Memoize projects to prevent unnecessary re-renders
   const projects = useMemo(() => data?.projects || [], [data?.projects]);
@@ -226,7 +239,7 @@ export default function Work({ data, timeline }) {
 
   return (
     <div className='h-full flex flex-col bg-[#d8cfbc] p-4'>
-      <div ref={boxRef} className='h-full' style={{ opacity: 0 }}>
+      <div ref={boxRef} className='h-full'>
         <WorkContent projects={projects} timeline={timeline} />
       </div>
     </div>
