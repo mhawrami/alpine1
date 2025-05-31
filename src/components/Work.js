@@ -92,13 +92,19 @@ function ProjectItem({ project, index }) {
         <div className='p-5 sm:p-6 flex-1 flex flex-col'>
           <div className='flex items-start justify-between gap-3'>
             <div className='flex-1 min-w-0'>
-              <h3 className='font-serif text-lg sm:text-xl text-[#565549] leading-snug line-clamp-2 mb-1.5 group-hover:text-[#565549]/90 transition-colors duration-300'>
-                {project.title}
-              </h3>
-              <div className='flex items-center gap-2 text-xs text-[#565549]/80'>
-                <span className='font-medium'>Kunde:</span>
-                <span className='truncate'>{project.client || 'Privat'}</span>
+              <div className='flex items-start gap-3 mb-2'>
+                <div className='flex-shrink-0 w-6 h-6 rounded-full bg-[#565549]/5 flex items-center justify-center mt-0.5'>
+                  <span className='text-[10px] font-medium text-[#565549]/80'>Kd</span>
+                </div>
+                <h3 className='font-serif text-xl text-[#565549] leading-tight whitespace-nowrap overflow-hidden text-ellipsis group-hover:text-[#565549]/90 transition-colors duration-300'>
+                  {project.title}
+                </h3>
               </div>
+              {project.client && (
+                <div className='text-xs text-[#565549]/80'>
+                  <span className='font-medium'>{project.client}</span>
+                </div>
+              )}
             </div>
             <div className='flex-shrink-0 text-[#565549]/30 group-hover:text-[#565549]/50 transition-colors duration-300'>
               <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
