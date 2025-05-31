@@ -74,18 +74,23 @@ function ProjectItem({ project, index }) {
           </div>
           
           {/* Premium hover overlay */}
-          <div className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-black/60 via-black/20 to-transparent'>
+          <a 
+            href={project.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-black/70 via-black/30 to-transparent'
+          >
             <div className='flex flex-col items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
-              <div className='bg-white text-[#565549] text-xs px-5 py-2.5 rounded-full font-medium shadow-md border border-white/30 hover:bg-white/95 transition-all duration-300 hover:scale-105'>
+              <div className='bg-white text-[#565549] text-sm px-6 py-3 rounded-full font-medium shadow-lg border-2 border-white/40 hover:bg-white/95 transition-all duration-300 hover:scale-105'>
                 Website öffnen
               </div>
               {project.year && (
-                <span className='mt-3 text-xs text-white/80 font-medium tracking-wide'>
+                <span className='mt-3 text-sm text-white/90 font-medium tracking-wide'>
                   {project.year}
                 </span>
               )}
             </div>
-          </div>
+          </a>
         </div>
 
         {/* Project Info (Always visible) */}
