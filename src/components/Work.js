@@ -52,41 +52,71 @@ function ProjectItem({ project, index }) {
     return (
       <div 
         ref={itemRef}
-        className='group relative h-full flex flex-col bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/5 hover:shadow-sm hover:-translate-y-0.5 border border-white/5 hover:border-white/10 active:scale-[0.98] active:opacity-90' // Simplified hover
+        className='group relative h-full flex flex-col bg-white/3 backdrop-blur-sm rounded-2xl overflow-hidden transition-all duration-400 hover:bg-white/5 hover:shadow-[0_8px_30px_rgba(86,85,73,0.05)] hover:-translate-y-1 border border-white/5 hover:border-white/10 active:scale-[0.98] active:opacity-90 transform-gpu will-change-transform' // Premium hover effects
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Project Image */}
         <div className='relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#565549]/5 to-[#d8cfbc]/5'>
-          <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10' />
+          {/* Subtle gradient overlay */}
+          <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10' />
           
-          <Image
-            src={mediaSrc}
-            alt={project.title}
-            fill
-            className={`object-cover transition-all duration-400 ease-out ${isHovered ? 'scale-105' : 'scale-100'} group-active:scale-100`}
-            sizes='(max-width: 768px) 100vw, 50vw'
-            priority={index < 4}
-          />
+          {/* Image with subtle zoom effect */}
+          <div className='relative w-full h-full overflow-hidden'>
+            <Image
+              src={mediaSrc}
+              alt={project.title}
+              fill
+              className={`object-cover transition-all duration-700 ease-out ${isHovered ? 'scale-110' : 'scale-100'} group-active:scale-100`}
+              sizes='(max-width: 768px) 100vw, 50vw'
+              priority={index < 4}
+            />
+          </div>
           
-          {/* Enhanced Hover Overlay */}
-          <div className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30'>
-            <div className='bg-white text-[#565549] text-xs px-4 py-2 rounded-full font-medium shadow-sm border border-white/20'>
-              Website öffnen
+          {/* Premium hover overlay */}
+          <div className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-black/60 via-black/20 to-transparent'>
+            <div className='flex flex-col items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
+              <div className='bg-white text-[#565549] text-xs px-5 py-2.5 rounded-full font-medium shadow-md border border-white/30 hover:bg-white/95 transition-all duration-300 hover:scale-105'>
+                Website öffnen
+              </div>
+              {project.year && (
+                <span className='mt-3 text-xs text-white/80 font-medium tracking-wide'>
+                  {project.year}
+                </span>
+              )}
             </div>
           </div>
         </div>
 
         {/* Project Info (Always visible) */}
-        <div className='p-4 flex-1 flex flex-col'>
-          <h3 className='font-serif text-base sm:text-lg text-[#565549] leading-snug line-clamp-2 mb-1'>{project.title}</h3>
-          <div className='mt-2 flex items-center gap-2 text-xs text-[#565549]/70'>
-            <span className='font-medium'>Kunde:</span>
-            <span className='truncate'>{project.client || 'Privat'}</span>
+        <div className='p-5 sm:p-6 flex-1 flex flex-col'>
+          <div className='flex items-start justify-between gap-3'>
+            <div className='flex-1 min-w-0'>
+              <h3 className='font-serif text-lg sm:text-xl text-[#565549] leading-snug line-clamp-2 mb-1.5 group-hover:text-[#565549]/90 transition-colors duration-300'>
+                {project.title}
+              </h3>
+              <div className='flex items-center gap-2 text-xs text-[#565549]/80'>
+                <span className='font-medium'>Kunde:</span>
+                <span className='truncate'>{project.client || 'Privat'}</span>
+              </div>
+            </div>
+            <div className='flex-shrink-0 text-[#565549]/30 group-hover:text-[#565549]/50 transition-colors duration-300'>
+              <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+                <path d='M7 7h10v10' />
+                <path d='M7 17 17 7' />
+              </svg>
+            </div>
           </div>
-          <div className='mt-auto pt-2 border-t border-[#565549]/5'>
-            <div className='text-xs text-[#565549]/50 font-sans tracking-wide truncate'>
-              {domain}
+          <div className='mt-auto pt-3 border-t border-[#565549]/5 group-hover:border-[#565549]/10 transition-colors duration-300'>
+            <div className='flex items-center justify-between'>
+              <span className='text-xs text-[#565549]/60 font-sans tracking-wide truncate pr-2'>
+                {domain}
+              </span>
+              {project.tags && (
+                <span className='flex-shrink-0 text-[10px] text-[#565549]/40 group-hover:text-[#565549]/60 transition-colors'>
+                  {project.tags}
+                </span>
+              )}
             </div>
           </div>
         </div>
