@@ -89,29 +89,31 @@ function ProjectItem({ project, index }) {
         </div>
 
         {/* Project Info (Always visible) */}
-        <div className='p-5 sm:p-6 flex-1 flex flex-col'>
-          <div className='flex items-start justify-between gap-3'>
-            <div className='flex-1 min-w-0'>
-              <div className='flex items-start gap-3 mb-2'>
-                <div className='flex-shrink-0 w-6 h-6 rounded-full bg-[#565549]/5 flex items-center justify-center mt-0.5'>
-                  <span className='text-[10px] font-medium text-[#565549]/80'>Kd</span>
-                </div>
-                <h3 className='font-serif text-xl text-[#565549] leading-tight whitespace-nowrap overflow-hidden text-ellipsis group-hover:text-[#565549]/90 transition-colors duration-300'>
-                  {project.title}
-                </h3>
+        <div className='p-5 sm:p-6 flex-1 flex flex-col relative overflow-hidden'>
+          {/* Kunde Badge in Background */}
+          {project.client && (
+            <div className='absolute -right-2 -top-2 opacity-5'>
+              <span className='font-serif text-8xl font-bold text-[#565549]'>Kunde</span>
+            </div>
+          )}
+          <div className='relative z-10'>
+            <div className='flex items-start justify-between'>
+              <h3 className='font-serif text-xl text-[#565549] leading-tight mb-2 group-hover:text-[#565549]/90 transition-colors duration-300'>
+                {project.title}
+              </h3>
+              <div className='flex-shrink-0 text-[#565549]/30 group-hover:text-[#565549]/50 transition-colors duration-300 ml-2 mt-0.5'>
+                <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+                  <path d='M7 7h10v10' />
+                  <path d='M7 17 17 7' />
+                </svg>
               </div>
-              {project.client && (
-                <div className='text-xs text-[#565549]/80'>
-                  <span className='font-medium'>{project.client}</span>
-                </div>
-              )}
             </div>
-            <div className='flex-shrink-0 text-[#565549]/30 group-hover:text-[#565549]/50 transition-colors duration-300'>
-              <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
-                <path d='M7 7h10v10' />
-                <path d='M7 17 17 7' />
-              </svg>
-            </div>
+            {project.client && (
+              <div className='text-sm text-[#565549]/70'>
+                <span className='font-medium'>{project.client}</span>
+              </div>
+            )}
+          </div>
           </div>
           <div className='mt-auto pt-3 border-t border-[#565549]/5 group-hover:border-[#565549]/10 transition-colors duration-300'>
             <div className='flex items-center justify-between'>
