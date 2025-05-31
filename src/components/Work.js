@@ -283,36 +283,21 @@ export default function Work({ data, timeline }) {
   // Content animation function
   const contentAnimation = (delay = 0) => {
     if (!timeline) return;
-    
-    // Reset initial state
-    gsap.set(containerRef.current, { 
-      opacity: 0,
-      y: 30,
-      scale: 1
-    });
-    
-    // Animate in
     timeline.to(containerRef.current, {
       opacity: 1,
       y: 0,
       duration: 0.8,
-      ease: 'power2.out',
-      onStart: () => {
-        // Make sure the container is visible during animation
-        if (containerRef.current) {
-          containerRef.current.style.display = 'block';
-        }
-      }
+      ease: 'power2.out'
     }, delay);
   };
 
   return (
     <Box 
       timeline={timeline}
-      className='opacity-0 bg-[#d8cfbc] p-4'
+      className='-translate-y-full scale-0 opacity-0 bg-[#d8cfbc] p-4 h-[calc(100vh-4rem)] flex flex-col'
       callbackAnimation={contentAnimation}
     >
-      <div ref={containerRef} className='h-full'>
+      <div ref={containerRef} className='flex-1 overflow-hidden flex flex-col'>
         <WorkContent projects={projects} timeline={timeline} />
       </div>
     </Box>
