@@ -2,10 +2,10 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import Box from './Box';
+import { useGSAP } from '@gsap/react';
 
-// Register ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
+// Register plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const availableWorkImages = [
   '/work1.jpg',
@@ -111,54 +111,72 @@ function ProjectItem({ project, index }) {
   }
 }
 
-function WorkContent({ projects }) {
+function WorkContent({ projects, timeline }) {
   const containerRef = useRef(null);
   const itemsRef = useRef([]);
+  const titleRef = useRef(null);
 
-  useEffect(() => {
-    // Initialize animations for each project item
-    itemsRef.current.forEach((item, index) => {
-      if (!item) return;
-      
-      gsap.fromTo(
-        item,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: index * 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-            once: true
-          }
-        }
-      );
+  // Animate in with the global timeline
+  useGSAP(() => {
+    if (!timeline) return;
+
+    // Reset initial state
+    gsap.set([titleRef.current, ...itemsRef.current], { 
+      opacity: 0, 
+      y: 20 
     });
 
-    return () => {
-      // Clean up ScrollTrigger instances
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [projects]);
+    // Add animations to the global timeline
+    timeline.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 20 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.6, 
+        ease: 'power2.out' 
+      },
+      '+=0.2' // Slight delay after previous animation
+    );
+
+    // Animate each project item with a stagger
+    timeline.fromTo(
+      itemsRef.current,
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.6, 
+        stagger: 0.1,
+        ease: 'power2.out' 
+      },
+      '-=0.4' // Overlap with previous animation
+    );
+  }, { scope: containerRef, dependencies: [timeline, projects] });
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-y-auto pr-2'>
-      {projects.map((project, index) => (
-        <div 
-          key={`${project.title}-${index}`}
-          ref={el => itemsRef.current[index] = el}
-          className='opacity-0'
-        >
-          <ProjectItem 
-            project={project}
-            index={index}
-          />
-        </div>
-      ))}
+    <div ref={containerRef} className='h-full overflow-y-auto pr-2'>
+      <div ref={titleRef} className='opacity-0 mb-8'>
+        <h2 className='text-2xl font-medium text-[#565549]'>
+          Portfolio
+        </h2>
+        <div className='mt-2 h-px w-12 bg-[#565549]/30'></div>
+      </div>
+      
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+        {projects.map((project, index) => (
+          <div 
+            key={`${project.title}-${index}`}
+            ref={el => itemsRef.current[index] = el}
+            className='opacity-0'
+          >
+            <ProjectItem 
+              project={project}
+              index={index}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -192,14 +210,7 @@ export default function Work({ data, timeline }) {
 
   return (
     <div className='h-full flex flex-col bg-[#d8cfbc] p-4'>
-      <div className='mb-6'>
-        <h2 className='text-2xl font-medium text-[#565549]'>
-          Portfolio
-        </h2>
-        <div className='mt-2 h-px w-12 bg-[#565549]/30'></div>
-      </div>
-      
-      <WorkContent projects={projects} />
+      <WorkContent projects={projects} timeline={timeline} />
     </div>
   );
 }
