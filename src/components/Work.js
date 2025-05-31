@@ -180,6 +180,7 @@ function WorkContent({ projects, timeline }) {
 export default function Work({ data, timeline }) {
   const containerRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
+  const boxRef = useRef(null);
   
   // Initialize component and set mounted state
   useEffect(() => {
