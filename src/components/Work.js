@@ -92,8 +92,8 @@ function ProjectItem({ project, index }) {
         <div className='p-5 sm:p-6 flex-1 flex flex-col relative overflow-hidden'>
           {/* Kunde Badge in Background */}
           {project.client && (
-            <div className='absolute -right-2 -top-2 opacity-5'>
-              <span className='font-serif text-8xl font-bold text-[#565549]'>Kunde</span>
+            <div className='absolute -right-4 -top-3 opacity-10'>
+              <span className='font-serif text-7xl font-bold text-[#565549] tracking-tight'>Kunde</span>
             </div>
           )}
           <div className='relative z-10'>
