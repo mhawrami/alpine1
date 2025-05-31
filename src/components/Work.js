@@ -72,7 +72,7 @@ function ProjectItem({ project, index }) {
           {/* Enhanced Hover Overlay */}
           <div className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30'>
             <div className='bg-white text-[#565549] text-xs px-4 py-2 rounded-full font-medium shadow-sm border border-white/20'>
-              View Project
+              Projekt ansehen
             </div>
           </div>
         </div>
@@ -80,6 +80,10 @@ function ProjectItem({ project, index }) {
         {/* Project Info (Always visible) */}
         <div className='p-4 flex-1 flex flex-col'>
           <h3 className='font-serif text-base sm:text-lg text-[#565549] leading-snug line-clamp-2 mb-1'>{project.title}</h3>
+          <div className='mt-2 flex items-center gap-2 text-xs text-[#565549]/70'>
+            <span className='font-medium'>Kunde:</span>
+            <span className='truncate'>{project.client || 'Privat'}</span>
+          </div>
           <div className='mt-auto pt-2 border-t border-[#565549]/5'>
             <div className='text-xs text-[#565549]/50 font-sans tracking-wide truncate'>
               {domain}
@@ -173,7 +177,7 @@ function WorkContent({ projects, timeline }) {
         <h2 
           ref={titleRef} 
           className='text-3xl sm:text-4xl md:text-5xl font-serif text-[#565549] mb-3 sm:mb-4 leading-tight tracking-tight'>
-          Selected Works
+          Ausgewählte Arbeiten
         </h2>
         <div className='w-12 sm:w-16 h-0.5 bg-[#565549]/30 mb-4 sm:mb-6'></div>
       </div>
