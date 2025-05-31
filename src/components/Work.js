@@ -114,7 +114,6 @@ function ProjectItem({ project, index }) {
               </div>
             )}
           </div>
-          </div>
           <div className='mt-auto pt-3 border-t border-[#565549]/5 group-hover:border-[#565549]/10 transition-colors duration-300'>
             <div className='flex items-center justify-between'>
               <span className='text-xs text-[#565549]/60 font-sans tracking-wide truncate pr-2'>
