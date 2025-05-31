@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useBoxAnimation } from '@/hooks/useAnimation';
+import Box from './Box';
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -117,26 +117,20 @@ function WorkContent({ projects, timeline }) {
   const titleRef = useRef(null);
   const itemsRef = useRef([]);
   
-  useGSAP(() => {
+  const contentAnimation = (delay = 0) => {
     if (!timeline) return;
     
-    // Reset initial state
-    gsap.set([titleRef.current, ...itemsRef.current].filter(Boolean), { 
-      opacity: 0, 
-      y: 20 
-    });
-    
-    // Animate title
+    // Animate title with a slight delay
     timeline.fromTo(
       titleRef.current,
-      { opacity: 0, y: 20 },
+      { opacity: 0, y: 30 },
       { 
         opacity: 1, 
         y: 0, 
-        duration: 0.4, 
+        duration: 0.8,
         ease: 'power2.out' 
       },
-      '+=0.1' // Small delay after box appears
+      delay + 0.3
     );
 
     // Animate project items with a staggered delay
@@ -145,17 +139,33 @@ function WorkContent({ projects, timeline }) {
       
       timeline.fromTo(
         item,
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 30 },
         { 
           opacity: 1, 
           y: 0, 
-          duration: 0.4,
+          duration: 0.8,
           ease: 'power2.out' 
         },
-        `-=${0.3 - (index * 0.05)}` // Staggered start times
+        delay + 0.3 + (index * 0.1) // Staggered start times
       );
     });
-  }, { scope: containerRef, dependencies: [timeline, projects] });
+  };
+  
+  // Set initial state
+  useGSAP(() => {
+    if (!timeline) return;
+    gsap.set([titleRef.current, ...itemsRef.current].filter(Boolean), { 
+      opacity: 0, 
+      y: 30 
+    });
+  }, { scope: containerRef });
+  
+  // Trigger animations when timeline is ready
+  useEffect(() => {
+    if (timeline) {
+      contentAnimation();
+    }
+  }, [timeline]);
 
   return (
     <div ref={containerRef} className='h-full overflow-y-auto pr-2'>
@@ -185,9 +195,8 @@ function WorkContent({ projects, timeline }) {
 }
 
 export default function Work({ data, timeline }) {
-  const containerRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
-  const boxRef = useRef(null);
+  const containerRef = useRef(null);
   
   // Initialize component and set mounted state
   useEffect(() => {
@@ -198,31 +207,6 @@ export default function Work({ data, timeline }) {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-  
-  // Use the box animation hook
-  useBoxAnimation(timeline, () => {
-    // Box animation is handled by useBoxAnimation
-  }, 0.7);
-  
-  // Animate the box appearance
-  useGSAP(() => {
-    if (!timeline || !boxRef.current) return;
-    
-    // Reset initial state
-    gsap.set(boxRef.current, { 
-      opacity: 0,
-      y: 20
-    });
-    
-    // Animate the box in
-    timeline.to(boxRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power2.out',
-      delay: 0.1 // Slight delay after the box animation starts
-    });
-  }, { scope: boxRef, dependencies: [timeline] });
   
   // Memoize projects to prevent unnecessary re-renders
   const projects = useMemo(() => data?.projects || [], [data?.projects]);
@@ -237,11 +221,26 @@ export default function Work({ data, timeline }) {
     );
   }
 
+  // Content animation function
+  const contentAnimation = (delay = 0) => {
+    if (!timeline) return;
+    timeline.to(containerRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, delay);
+  };
+
   return (
-    <div className='h-full flex flex-col bg-[#d8cfbc] p-4'>
-      <div ref={boxRef} className='h-full'>
+    <Box 
+      timeline={timeline}
+      className='-translate-y-full scale-0 opacity-0 bg-[#d8cfbc] p-4'
+      callbackAnimation={contentAnimation}
+    >
+      <div ref={containerRef} className='h-full'>
         <WorkContent projects={projects} timeline={timeline} />
       </div>
-    </div>
+    </Box>
   );
 }
