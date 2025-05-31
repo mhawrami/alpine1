@@ -56,14 +56,12 @@ function ProjectItem({ project, index }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Kunde Badge */}
-        {project.client && (
-          <div className='absolute top-4 right-4 z-20'>
-            <div className='bg-[#565549] text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm'>
-              Kunde
-            </div>
+        {/* Kunde Badge - Always show for all projects */}
+        <div className='absolute top-4 right-4 z-20'>
+          <div className='bg-[#565549] text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm'>
+            Kunde
           </div>
-        )}
+        </div>
         {/* Project Image */}
         <div className='relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#565549]/5 to-[#d8cfbc]/5'>
           {/* Subtle gradient overlay */}
