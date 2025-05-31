@@ -106,7 +106,7 @@ function ProjectItem({ project, index }) {
 
           <div className='relative z-10'>
             <div className='flex items-start justify-between'>
-              <h3 className='font-serif text-xl text-[#565549] leading-tight mb-2 group-hover:text-[#565549]/90 transition-colors duration-300'>
+              <h3 className='font-serif text-lg text-[#565549] leading-tight mb-1.5 group-hover:text-[#565549]/90 transition-colors duration-300'>
                 {project.title}
               </h3>
               <div className='flex-shrink-0 text-[#565549]/30 group-hover:text-[#565549]/50 transition-colors duration-300 ml-2 mt-0.5'>
