@@ -67,16 +67,26 @@ function ProjectItem({ project, index }) {
           {/* Subtle gradient overlay */}
           <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10' />
           
-          {/* Image with subtle zoom effect */}
+          {/* Image with subtle zoom effect and fallback */}
           <div className='relative w-full h-full overflow-hidden'>
-            <Image
-              src={mediaSrc}
-              alt={project.title}
-              fill
-              className={`object-cover transition-all duration-700 ease-out ${isHovered ? 'scale-110' : 'scale-100'} group-active:scale-100`}
-              sizes='(max-width: 768px) 100vw, 50vw'
-              priority={index < 4}
-            />
+            {project.media ? (
+              <Image
+                src={mediaSrc}
+                alt={project.title}
+                fill
+                className={`object-cover transition-all duration-700 ease-out ${isHovered ? 'scale-110' : 'scale-100'} group-active:scale-100`}
+                sizes='(max-width: 768px) 100vw, 50vw'
+                priority={index < 4}
+                onError={(e) => {
+                  console.error(`Failed to load image: ${project.media}`);
+                  e.target.style.display = 'none';
+                }}
+              />
+            ) : (
+              <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#565549]/5 to-[#d8cfbc]/10 p-4'>
+                <span className='text-[#565549]/40 text-sm text-center font-medium'>{project.title}</span>
+              </div>
+            )}
           </div>
           
           {/* Premium hover overlay */}
