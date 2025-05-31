@@ -115,9 +115,16 @@ function ProjectItem({ project, index }) {
 function WorkContent({ projects, timeline }) {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
-  const boxRef = useBoxAnimation(timeline, () => {
-    // Additional animations after the box appears
+  const itemsRef = useRef([]);
+  
+  useGSAP(() => {
     if (!timeline) return;
+    
+    // Reset initial state
+    gsap.set([titleRef.current, ...itemsRef.current].filter(Boolean), { 
+      opacity: 0, 
+      y: 20 
+    });
     
     // Animate title
     timeline.fromTo(
@@ -133,8 +140,7 @@ function WorkContent({ projects, timeline }) {
     );
 
     // Animate project items with a staggered delay
-    projects.forEach((_, index) => {
-      const item = containerRef.current?.querySelector(`.project-item-${index}`);
+    itemsRef.current.forEach((item, index) => {
       if (!item) return;
       
       timeline.fromTo(
@@ -149,7 +155,7 @@ function WorkContent({ projects, timeline }) {
         `-=${0.3 - (index * 0.05)}` // Staggered start times
       );
     });
-  }, 0.7); // Same delay as other boxes
+  }, { scope: containerRef, dependencies: [timeline, projects] });
 
   return (
     <div ref={containerRef} className='h-full overflow-y-auto pr-2'>
@@ -164,7 +170,8 @@ function WorkContent({ projects, timeline }) {
         {projects.map((project, index) => (
           <div 
             key={`${project.title}-${index}`}
-            className={`project-item-${index} opacity-0`}
+            ref={el => itemsRef.current[index] = el}
+            className='opacity-0'
           >
             <ProjectItem 
               project={project}
@@ -192,6 +199,18 @@ export default function Work({ data, timeline }) {
     };
   }, []);
   
+  // Use the box animation hook
+  useBoxAnimation(timeline, () => {
+    // Additional animations after box appears
+    if (timeline && boxRef.current) {
+      gsap.to(boxRef.current, { 
+        opacity: 1, 
+        duration: 0.4,
+        ease: 'power2.out' 
+      });
+    }
+  }, 0.7);
+  
   // Memoize projects to prevent unnecessary re-renders
   const projects = useMemo(() => data?.projects || [], [data?.projects]);
   
@@ -206,8 +225,10 @@ export default function Work({ data, timeline }) {
   }
 
   return (
-    <div ref={boxRef} className='box h-full flex flex-col bg-[#d8cfbc] p-4 opacity-0'>
-      <WorkContent projects={projects} timeline={timeline} />
+    <div className='h-full flex flex-col bg-[#d8cfbc] p-4'>
+      <div ref={boxRef} className='h-full' style={{ opacity: 0 }}>
+        <WorkContent projects={projects} timeline={timeline} />
+      </div>
     </div>
   );
 }
