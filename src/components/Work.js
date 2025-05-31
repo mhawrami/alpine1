@@ -47,50 +47,60 @@ function ProjectItem({ project, index }) {
   try {
     const url = new URL(project.url);
     const domain = url.hostname.replace('www.', '');
+    const isExternal = !url.hostname.includes(window.location.hostname);
 
     return (
       <div 
         ref={itemRef}
-        className='group relative h-full flex flex-col bg-[#d8cfbc] border border-[#565549]/10 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-[#565549]/20'
+        className='group relative h-full flex flex-col bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 border border-white/5 hover:border-white/10 h-full flex flex-col'
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Project Thumbnail */}
-        <div className='relative aspect-[4/3] w-full overflow-hidden bg-[#565549]/10'>
+        {/* Project Image */}
+        <div className='relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#565549]/10 to-[#d8cfbc]/10'>
+          <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10' />
+          
           <Image
             src={mediaSrc}
             alt={project.title}
             fill
-            className={`object-cover transition-transform duration-500 ${isHovered ? 'scale-105' : 'scale-100'}`}
+            className={`object-cover transition-all duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
             sizes='(max-width: 768px) 100vw, 50vw'
-            quality={85}
-            placeholder='blur'
-            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAExgF4q6tRTQAAAABJRU5ErkJggg=='
-            onError={(e) => {
-              console.error(`Failed to load image: ${mediaSrc}`);
-              e.target.src = availableWorkImages[0];
-            }}
+            priority={index < 4}
           />
           
           {/* Hover Overlay */}
-          <div className={`absolute inset-0 bg-[#565549]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
-            <span className='inline-flex items-center text-white text-sm font-medium bg-black/60 px-3 py-1.5 rounded-full'>
-              <span>View Project</span>
-              <svg className='ml-1.5 w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
-              </svg>
-            </span>
+          <div className='absolute inset-0 flex flex-col justify-end p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+            <div className='translate-y-4 group-hover:translate-y-0 transition-transform duration-300'>
+              <div className='inline-flex items-center px-3 py-1 bg-white/90 text-[#565549] text-[10px] tracking-wider font-medium rounded-full mb-3 backdrop-blur-sm'>
+                {project.category || 'WEB PROJECT'}
+              </div>
+              <h3 className='text-white text-2xl font-serif font-normal leading-tight mb-3 drop-shadow-sm'>{project.title}</h3>
+              <div className='flex items-center text-white/90 text-xs tracking-wide'>
+                <span className='truncate font-sans font-normal'>{domain}</span>
+                {isExternal && (
+                  <span className='ml-2 px-2 py-0.5 bg-white/10 rounded-full text-[10px] text-white/70 tracking-wider'>
+                    EXTERNAL
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Project Info */}
-        <div className='p-4 flex-1 flex flex-col'>
-          <h3 className='font-medium text-[#565549] line-clamp-2 mb-2'>{project.title}</h3>
-          <div className='mt-auto pt-3 border-t border-[#565549]/10'>
-            <div className='flex items-center text-sm text-[#565549]/80'>
-              <svg className='w-3.5 h-3.5 mr-1.5 flex-shrink-0' fill='none' stroke='#565549' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1' />
+        {/* Project Info (Visible by default) */}
+        <div className='p-4 flex-1 flex flex-col transition-all duration-300 group-hover:opacity-0'>
+          <div className='flex items-start justify-between gap-2 mb-2'>
+            <h3 className='font-serif text-xl text-[#565549] leading-tight line-clamp-2'>{project.title}</h3>
+            <span className='flex-shrink-0 text-[#565549]/40 group-hover:text-[#565549] transition-colors mt-0.5'>
+              <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                <path d='M7 7h10v10' />
+                <path d='M7 17 17 7' />
               </svg>
+            </span>
+          </div>
+          <div className='mt-auto pt-3 border-t border-[#565549]/10'>
+            <div className='flex items-center text-xs text-[#565549]/60 font-sans tracking-wide'>
               <span className='truncate'>{domain}</span>
             </div>
           </div>
@@ -103,6 +113,14 @@ function ProjectItem({ project, index }) {
           rel='noopener noreferrer'
           className='absolute inset-0 z-10'
           aria-label={`Visit ${project.title} (opens in new tab)`}
+          onClick={(e) => {
+            // Add click animation
+            const el = e.currentTarget;
+            el.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+              el.style.transform = '';
+            }, 150);
+          }}
         />
       </div>
     );
@@ -169,19 +187,22 @@ function WorkContent({ projects, timeline }) {
 
   return (
     <div ref={containerRef} className='h-full overflow-y-auto pr-2'>
-      <div ref={titleRef} className='opacity-0 mb-8'>
-        <h2 className='text-2xl font-medium text-[#565549]'>
-          Portfolio
+      <div className='mb-12'>
+        <span className='block text-sm uppercase tracking-widest text-[#565549]/60 mb-2'>Portfolio</span>
+        <h2 
+          ref={titleRef} 
+          className='text-4xl md:text-5xl font-serif text-[#565549] mb-4 leading-tight tracking-tight'>
+          Selected Works
         </h2>
-        <div className='mt-2 h-px w-12 bg-[#565549]/30'></div>
+        <div className='w-16 h-0.5 bg-[#565549]/30 mb-6'></div>
       </div>
       
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
         {projects.map((project, index) => (
           <div 
             key={`${project.title}-${index}`}
             ref={el => itemsRef.current[index] = el}
-            className='opacity-0'
+            className='opacity-0 transition-opacity duration-300'
           >
             <ProjectItem 
               project={project}
