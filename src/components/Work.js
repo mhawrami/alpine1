@@ -32,38 +32,16 @@ const fadeInUp = {
   })
 };
 
-function ProjectItem({ project, index, animate = true }) {
+function ProjectItem({ project, index }) {
   const [isHovered, setIsHovered] = useState(false);
   const itemRef = useRef(null);
-
-  useEffect(() => {
-    if (!animate || !itemRef.current) return;
-    
-    gsap.fromTo(
-      itemRef.current,
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: itemRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-          once: true
-        }
-      }
-    );
-  }, [index, animate]);
 
   if (!project?.url) return null;
 
   // Verify the media exists
   const mediaSrc = availableWorkImages.includes(project.media) 
     ? project.media 
-    : availableWorkImages[0]; // Fallback to first image if not found
+    : availableWorkImages[0];
 
   try {
     const url = new URL(project.url);
@@ -72,76 +50,59 @@ function ProjectItem({ project, index, animate = true }) {
     return (
       <div 
         ref={itemRef}
-        className='project-item group relative overflow-hidden rounded-xl bg-white/5 transition-all duration-300 hover:bg-white/10 hover:shadow-lg transform hover:-translate-y-1 will-change-transform'
+        className='group relative h-full flex flex-col bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200'
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        style={{ opacity: 0 }} // Start hidden, will be animated in
       >
         {/* Project Thumbnail */}
-        <div className='relative aspect-[16/9] w-full overflow-hidden'>
+        <div className='relative aspect-[4/3] w-full overflow-hidden bg-gray-50'>
           <Image
             src={mediaSrc}
             alt={project.title}
             fill
-            className='h-full w-full transform object-cover transition-transform duration-700 group-hover:scale-105'
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            className={`object-cover transition-transform duration-500 ${isHovered ? 'scale-105' : 'scale-100'}`}
+            sizes='(max-width: 768px) 100vw, 50vw'
             quality={85}
             placeholder='blur'
             blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAExgF4q6tRTQAAAABJRU5ErkJggg=='
             onError={(e) => {
               console.error(`Failed to load image: ${mediaSrc}`);
-              e.target.src = availableWorkImages[0]; // Fallback to first image on error
+              e.target.src = availableWorkImages[0];
             }}
           />
           
-          {/* Overlay */}
-          <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+          {/* Hover Overlay */}
+          <div className={`absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
+            <span className='inline-flex items-center text-white text-sm font-medium bg-black/60 px-3 py-1.5 rounded-full'>
+              <span>View Project</span>
+              <svg className='ml-1.5 w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+              </svg>
+            </span>
+          </div>
         </div>
 
         {/* Project Info */}
-        <div className='p-6'>
-          <div className='flex items-start justify-between'>
-            <h3 className='text-xl font-medium text-white transition-colors duration-200 group-hover:text-amber-100'>
-              {project.title}
-            </h3>
-            
-            <a
-              href={project.url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-200 hover:bg-white/20 hover:text-amber-300'
-              aria-label={`Visit ${project.title}`}
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-5 w-5 rotate-[-45deg] transform transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M14 5l7 7m0 0l-7 7m7-7H3'
-                />
+        <div className='p-4 flex-1 flex flex-col'>
+          <h3 className='font-medium text-gray-900 line-clamp-2 mb-2'>{project.title}</h3>
+          <div className='mt-auto pt-2 border-t border-gray-100'>
+            <div className='flex items-center text-sm text-gray-500'>
+              <svg className='w-3.5 h-3.5 mr-1.5 flex-shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1' />
               </svg>
-            </a>
-          </div>
-          
-          <div className='mt-2 flex items-center space-x-2'>
-            <span className='text-sm text-gray-400'>{domain}</span>
-            <span className='text-gray-600'>•</span>
-            <a 
-              href={project.url} 
-              target='_blank' 
-              rel='noopener noreferrer'
-              className='text-sm font-medium text-amber-400 hover:underline hover:text-amber-300 transition-colors'
-            >
-              Visit Site
-            </a>
+              <span className='truncate'>{domain}</span>
+            </div>
           </div>
         </div>
+        
+        {/* External Link */}
+        <a
+          href={project.url}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='absolute inset-0 z-10'
+          aria-label={`Visit ${project.title} (opens in new tab)`}
+        />
       </div>
     );
   } catch (e) {
@@ -152,35 +113,51 @@ function ProjectItem({ project, index, animate = true }) {
 
 function WorkContent({ projects }) {
   const containerRef = useRef(null);
+  const itemsRef = useRef([]);
 
   useEffect(() => {
-    // Initialize ScrollTrigger for the container
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-          once: true
+    // Initialize animations for each project item
+    itemsRef.current.forEach((item, index) => {
+      if (!item) return;
+      
+      gsap.fromTo(
+        item,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+            once: true
+          }
         }
-      }
-    );
+      );
+    });
+
+    return () => {
+      // Clean up ScrollTrigger instances
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, [projects]);
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 h-full overflow-y-auto pr-2'>
       {projects.map((project, index) => (
-        <ProjectItem 
+        <div 
           key={`${project.title}-${index}`}
-          project={project}
-          index={index}
-        />
+          ref={el => itemsRef.current[index] = el}
+          className='opacity-0'
+        >
+          <ProjectItem 
+            project={project}
+            index={index}
+          />
+        </div>
       ))}
     </div>
   );
@@ -207,41 +184,22 @@ export default function Work({ data, timeline }) {
 
   if (!data?.projects?.length) {
     return (
-      <section className='relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white'>
-        <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center'>
-          <h2 className='text-4xl font-heading font-normal text-gray-800 mb-4'>
-            Our <span className='text-amber-500'>Work</span>
-          </h2>
-          <div className='w-20 h-0.5 bg-amber-400 mx-auto'></div>
-          <p className='mt-6 text-gray-600 max-w-2xl mx-auto'>
-            No projects available at the moment. Please check back later.
-          </p>
-        </div>
-      </section>
+      <div className='h-full flex items-center justify-center p-4'>
+        <p className='text-gray-400'>No projects available</p>
+      </div>
     );
   }
 
   return (
-    <section className='relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white'>
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
-        <div className='text-center mb-16' ref={containerRef}>
-          <h2 className='text-4xl font-heading font-normal text-gray-800 mb-4'>
-            Our <span className='text-amber-500'>Work</span>
-          </h2>
-          <div className='w-20 h-0.5 bg-amber-400 mx-auto'></div>
-          <p className='mt-6 text-gray-600 max-w-2xl mx-auto'>
-            Explore our portfolio of carefully crafted projects, each designed with precision and attention to detail.
-          </p>
-        </div>
-        
-        <WorkContent projects={projects} />
-        
-        <div className='mt-16 text-center'>
-          <button className='px-8 py-3 bg-amber-500 text-white rounded-full font-medium hover:bg-amber-600 transition-colors duration-300 transform hover:scale-105'>
-            View All Projects
-          </button>
-        </div>
+    <div className='h-full flex flex-col'>
+      <div className='mb-4'>
+        <h2 className='text-2xl font-medium text-gray-800'>
+          Portfolio
+        </h2>
+        <div className='mt-2 h-px w-12 bg-gray-300'></div>
       </div>
-    </section>
+      
+      <WorkContent projects={projects} />
+    </div>
   );
 }
