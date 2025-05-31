@@ -81,7 +81,7 @@ function ProjectItem({ project, index }) {
             className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-black/70 via-black/30 to-transparent'
           >
             <div className='flex flex-col items-center justify-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500'>
-              <div className='bg-white text-[#565549] text-sm px-6 py-3 rounded-full font-medium shadow-lg border-2 border-white/40 hover:bg-white/95 transition-all duration-300 hover:scale-105'>
+              <div className='bg-[#d8cfbc] text-[#565549] text-sm px-6 py-3 rounded-full font-medium shadow-lg border-2 border-white/40 hover:bg-[#d8cfbc]/95 transition-all duration-300 hover:scale-105'>
                 Website öffnen
               </div>
               {project.year && (
@@ -97,9 +97,9 @@ function ProjectItem({ project, index }) {
         <div className='p-5 sm:p-6 flex-1 flex flex-col relative overflow-hidden'>
           {/* Kunde Badge in Background */}
           {project.client && (
-            <div className='absolute right-0 top-0 w-full h-full flex items-center justify-center pointer-events-none'>
-              <span className='font-serif text-[120px] font-bold text-[#565549]/10 transform rotate-[-15deg] whitespace-nowrap'>
-                Kunde
+            <div className='absolute right-0 top-0 w-full h-full flex items-center justify-center pointer-events-none overflow-hidden'>
+              <span className='font-serif text-[100px] font-bold text-[#565549]/20 transform rotate-[-15deg] whitespace-nowrap'>
+                KUNDE
               </span>
             </div>
           )}
