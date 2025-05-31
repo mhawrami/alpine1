@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -150,96 +150,7 @@ function ProjectItem({ project, index, animate = true }) {
   }
 }
 
-export default function Work({ data, timeline }) {
-  const [isMounted, setIsMounted] = useState(false);
-  
-  // Log whenever data changes
-  useEffect(() => {
-    console.log('Work component data updated:', {
-      hasData: !!data,
-      dataKeys: data ? Object.keys(data) : [],
-      projects: data?.projects,
-      projectsCount: data?.projects?.length,
-      firstProject: data?.projects?.[0]
-    });
-    
-    // Log available work images
-    console.log('Available work images:', availableWorkImages);
-    
-    setIsMounted(true);
-  }, [data]);
-
-  const contentAnimation = (delay) => {
-    if (!timeline) return;
-    
-    timeline
-      .from('.project-item', { 
-        y: 30, 
-        opacity: 0, 
-        stagger: 0.1,
-        ease: 'power2.out',
-        duration: 0.6
-      }, delay);
-  };
-
-  // Debug: Log when component renders
-  console.log('Rendering Work component', { 
-    isMounted, 
-    hasProjects: data?.projects?.length > 0,
-    projectsCount: data?.projects?.length
-  });
-
-  if (!isMounted) {
-    return (
-      <Box
-        timeline={timeline}
-        className='-translate-x-full scale-0 py-0 opacity-0'
-        callbackAnimation={contentAnimation}
-      >
-        <div className='relative z-10 size-full overflow-hidden'>
-          <div className='mb-8 mt-8'>
-            <div className='px-8'>
-              <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549', letterSpacing: '0.5px' }}>
-                Portfolio
-              </h2>
-              <div className='mt-3 h-px w-20 bg-gray-400/50'></div>
-            </div>
-          </div>
-          <div className='flex h-64 items-center justify-center'>
-            <p className='text-gray-400'>Loading portfolio...</p>
-          </div>
-        </div>
-      </Box>
-    );
-  }
-
-  if (!data?.projects?.length) {
-    console.log('No projects available in data');
-    return (
-      <Box
-        timeline={timeline}
-        className='-translate-x-full scale-0 py-0 opacity-0'
-        callbackAnimation={contentAnimation}
-      >
-        <div className='relative z-10 size-full overflow-hidden'>
-          <div className='mb-8 mt-8'>
-            <div className='px-8'>
-              <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549', letterSpacing: '0.5px' }}>
-                Portfolio
-              </h2>
-              <div className='mt-3 h-px w-20 bg-gray-400/50'></div>
-            </div>
-          </div>
-          <div className='flex h-64 items-center justify-center'>
-            <p className='text-gray-400'>No projects available</p>
-          </div>
-        </div>
-      </Box>
-    );
-  }
-
-  console.log('Rendering projects:', data.projects);
-  
+function WorkContent({ projects }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -260,7 +171,55 @@ export default function Work({ data, timeline }) {
         }
       }
     );
+  }, [projects]);
+
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4'>
+      {projects.map((project, index) => (
+        <ProjectItem 
+          key={`${project.title}-${index}`}
+          project={project}
+          index={index}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function Work({ data, timeline }) {
+  const containerRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Initialize component and set mounted state
+  useEffect(() => {
+    setIsMounted(true);
+    
+    return () => {
+      // Clean up GSAP instances
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
+  
+  // Memoize projects to prevent unnecessary re-renders
+  const projects = useMemo(() => data?.projects || [], [data?.projects]);
+  
+  if (!isMounted) return null;
+
+  if (!data?.projects?.length) {
+    return (
+      <section className='relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center'>
+          <h2 className='text-4xl font-heading font-normal text-gray-800 mb-4'>
+            Our <span className='text-amber-500'>Work</span>
+          </h2>
+          <div className='w-20 h-0.5 bg-amber-400 mx-auto'></div>
+          <p className='mt-6 text-gray-600 max-w-2xl mx-auto'>
+            No projects available at the moment. Please check back later.
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className='relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white'>
@@ -275,16 +234,7 @@ export default function Work({ data, timeline }) {
           </p>
         </div>
         
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4'>
-          {data.projects.map((project, index) => (
-            <ProjectItem 
-              key={`${project.title}-${index}`}
-              project={project}
-              index={index}
-              animate={isMounted}
-            />
-          ))}
-        </div>
+        <WorkContent projects={projects} />
         
         <div className='mt-16 text-center'>
           <button className='px-8 py-3 bg-amber-500 text-white rounded-full font-medium hover:bg-amber-600 transition-colors duration-300 transform hover:scale-105'>
