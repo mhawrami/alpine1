@@ -52,19 +52,19 @@ function ProjectItem({ project, index }) {
     return (
       <div 
         ref={itemRef}
-        className='group relative h-full flex flex-col bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 border border-white/5 hover:border-white/10 h-full flex flex-col'
+        className='group relative h-full flex flex-col bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/10 hover:shadow-md hover:-translate-y-0.5 border border-white/5 hover:border-white/10'
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Project Image */}
-        <div className='relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#565549]/10 to-[#d8cfbc]/10'>
-          <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10' />
+        <div className='relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#565549]/5 to-[#d8cfbc]/5'>
+          <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10' />
           
           <Image
             src={mediaSrc}
             alt={project.title}
             fill
-            className={`object-cover transition-all duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+            className={`object-cover transition-all duration-500 ease-out ${isHovered ? 'scale-105' : 'scale-100'}`}
             sizes='(max-width: 768px) 100vw, 50vw'
             priority={index < 4}
           />
@@ -72,14 +72,14 @@ function ProjectItem({ project, index }) {
           {/* Hover Overlay */}
           <div className='absolute inset-0 flex flex-col justify-end p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
             <div className='translate-y-4 group-hover:translate-y-0 transition-transform duration-300'>
-              <div className='inline-flex items-center px-3 py-1 bg-white/90 text-[#565549] text-[10px] tracking-wider font-medium rounded-full mb-3 backdrop-blur-sm'>
-                {project.category || 'WEB PROJECT'}
+              <div className='inline-flex items-center px-2.5 py-0.5 bg-white/90 text-[#565549] text-[9px] tracking-wider font-medium rounded-full mb-2.5 backdrop-blur-sm'>
+                {project.category || 'WORK'}
               </div>
-              <h3 className='text-white text-2xl font-serif font-normal leading-tight mb-3 drop-shadow-sm'>{project.title}</h3>
-              <div className='flex items-center text-white/90 text-xs tracking-wide'>
+              <h3 className='text-white text-xl font-serif font-normal leading-tight mb-2 drop-shadow-sm'>{project.title}</h3>
+              <div className='flex items-center text-white/85 text-[11px] tracking-wide'>
                 <span className='truncate font-sans font-normal'>{domain}</span>
                 {isExternal && (
-                  <span className='ml-2 px-2 py-0.5 bg-white/10 rounded-full text-[10px] text-white/70 tracking-wider'>
+                  <span className='ml-1.5 px-1.5 py-0.5 bg-white/10 rounded-full text-[9px] text-white/60 tracking-wider'>
                     EXTERNAL
                   </span>
                 )}
@@ -90,17 +90,17 @@ function ProjectItem({ project, index }) {
 
         {/* Project Info (Visible by default) */}
         <div className='p-4 flex-1 flex flex-col transition-all duration-300 group-hover:opacity-0'>
-          <div className='flex items-start justify-between gap-2 mb-2'>
-            <h3 className='font-serif text-xl text-[#565549] leading-tight line-clamp-2'>{project.title}</h3>
-            <span className='flex-shrink-0 text-[#565549]/40 group-hover:text-[#565549] transition-colors mt-0.5'>
-              <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+          <div className='flex items-start justify-between gap-2 mb-1.5'>
+            <h3 className='font-serif text-lg text-[#565549] leading-snug line-clamp-2'>{project.title}</h3>
+            <span className='flex-shrink-0 text-[#565549]/30 group-hover:text-[#565549]/60 transition-colors duration-200 mt-0.5'>
+              <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
                 <path d='M7 7h10v10' />
                 <path d='M7 17 17 7' />
               </svg>
             </span>
           </div>
-          <div className='mt-auto pt-3 border-t border-[#565549]/10'>
-            <div className='flex items-center text-xs text-[#565549]/60 font-sans tracking-wide'>
+          <div className='mt-auto pt-2.5 border-t border-[#565549]/5'>
+            <div className='flex items-center text-[11px] text-[#565549]/50 font-sans tracking-wide'>
               <span className='truncate'>{domain}</span>
             </div>
           </div>
