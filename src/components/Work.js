@@ -57,8 +57,8 @@ function ProjectItem({ project, index }) {
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Kunde Badge - Always show for all projects */}
-        <div className='absolute top-4 right-4 z-20'>
-          <div className='bg-[#565549] text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm'>
+        <div className='absolute top-3 right-3 z-20'>
+          <div className='bg-[#565549] text-white text-[10px] font-medium uppercase tracking-wider px-2 py-1 rounded-full'>
             Kunde
           </div>
         </div>
