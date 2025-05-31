@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Box from './Box';
 
-// Debug: List of available work images
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
 const availableWorkImages = [
   '/work1.jpg',
   '/work2.jpg',
@@ -14,8 +18,45 @@ const availableWorkImages = [
   '/work8.jpg'
 ];
 
-function ProjectItem({ project, index }) {
+// Animation variants for framer-motion like API
+const fadeInUp = {
+  hidden: { y: 40, opacity: 0 },
+  visible: (i = 0) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  })
+};
+
+function ProjectItem({ project, index, animate = true }) {
   const [isHovered, setIsHovered] = useState(false);
+  const itemRef = useRef(null);
+
+  useEffect(() => {
+    if (!animate || !itemRef.current) return;
+    
+    gsap.fromTo(
+      itemRef.current,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: itemRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true
+        }
+      }
+    );
+  }, [index, animate]);
 
   if (!project?.url) return null;
 
@@ -30,9 +71,11 @@ function ProjectItem({ project, index }) {
 
     return (
       <div 
-        className='project-item group relative overflow-hidden rounded-xl bg-white/5 transition-all duration-300 hover:bg-white/10 hover:shadow-lg'
+        ref={itemRef}
+        className='project-item group relative overflow-hidden rounded-xl bg-white/5 transition-all duration-300 hover:bg-white/10 hover:shadow-lg transform hover:-translate-y-1 will-change-transform'
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        style={{ opacity: 0 }} // Start hidden, will be animated in
       >
         {/* Project Thumbnail */}
         <div className='relative aspect-[16/9] w-full overflow-hidden'>
@@ -197,37 +240,58 @@ export default function Work({ data, timeline }) {
 
   console.log('Rendering projects:', data.projects);
   
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize ScrollTrigger for the container
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          once: true
+        }
+      }
+    );
+  }, []);
+
   return (
-    <Box
-      timeline={timeline}
-      className='-translate-x-full scale-0 py-0 opacity-0'
-      callbackAnimation={contentAnimation}
-    >
-      <div className='relative z-10 size-full overflow-hidden'>
-        <div className='mb-8 mt-8'>
-          <div className='px-8'>
-            <h2 className='font-heading text-4xl font-normal' style={{ color: '#565549', letterSpacing: '0.5px' }}>
-              Portfolio
-            </h2>
-            <div className='mt-3 h-px w-20 bg-gray-400/50'></div>
-          </div>
+    <section className='relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white'>
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl'>
+        <div className='text-center mb-16' ref={containerRef}>
+          <h2 className='text-4xl font-heading font-normal text-gray-800 mb-4'>
+            Our <span className='text-amber-500'>Work</span>
+          </h2>
+          <div className='w-20 h-0.5 bg-amber-400 mx-auto'></div>
+          <p className='mt-6 text-gray-600 max-w-2xl mx-auto'>
+            Explore our portfolio of carefully crafted projects, each designed with precision and attention to detail.
+          </p>
         </div>
         
-        <div className='hide-scrollbar w-full overflow-y-auto px-4 pb-12 sm:px-6 lg:px-8'>
-          <div className='mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {data.projects.map((project, index) => {
-              console.log('Rendering project:', project.title);
-              return (
-                <ProjectItem 
-                  key={`${project.title}-${index}`}
-                  project={project}
-                  index={index}
-                />
-              );
-            })}
-          </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4'>
+          {data.projects.map((project, index) => (
+            <ProjectItem 
+              key={`${project.title}-${index}`}
+              project={project}
+              index={index}
+              animate={isMounted}
+            />
+          ))}
+        </div>
+        
+        <div className='mt-16 text-center'>
+          <button className='px-8 py-3 bg-amber-500 text-white rounded-full font-medium hover:bg-amber-600 transition-colors duration-300 transform hover:scale-105'>
+            View All Projects
+          </button>
         </div>
       </div>
-    </Box>
+    </section>
   );
 }
