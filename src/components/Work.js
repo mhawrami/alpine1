@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useBoxAnimation } from '@/hooks/useAnimation';
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -113,46 +114,42 @@ function ProjectItem({ project, index }) {
 
 function WorkContent({ projects, timeline }) {
   const containerRef = useRef(null);
-  const itemsRef = useRef([]);
   const titleRef = useRef(null);
-
-  // Animate in with the global timeline
-  useGSAP(() => {
+  const boxRef = useBoxAnimation(timeline, () => {
+    // Additional animations after the box appears
     if (!timeline) return;
-
-    // Reset initial state
-    gsap.set([titleRef.current, ...itemsRef.current], { 
-      opacity: 0, 
-      y: 20 
-    });
-
-    // Add animations to the global timeline
+    
+    // Animate title
     timeline.fromTo(
       titleRef.current,
       { opacity: 0, y: 20 },
       { 
         opacity: 1, 
         y: 0, 
-        duration: 0.6, 
+        duration: 0.4, 
         ease: 'power2.out' 
       },
-      '+=0.2' // Slight delay after previous animation
+      '+=0.1' // Small delay after box appears
     );
 
-    // Animate each project item with a stagger
-    timeline.fromTo(
-      itemsRef.current,
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        stagger: 0.1,
-        ease: 'power2.out' 
-      },
-      '-=0.4' // Overlap with previous animation
-    );
-  }, { scope: containerRef, dependencies: [timeline, projects] });
+    // Animate project items with a staggered delay
+    projects.forEach((_, index) => {
+      const item = containerRef.current?.querySelector(`.project-item-${index}`);
+      if (!item) return;
+      
+      timeline.fromTo(
+        item,
+        { opacity: 0, y: 20 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.4,
+          ease: 'power2.out' 
+        },
+        `-=${0.3 - (index * 0.05)}` // Staggered start times
+      );
+    });
+  }, 0.7); // Same delay as other boxes
 
   return (
     <div ref={containerRef} className='h-full overflow-y-auto pr-2'>
@@ -167,8 +164,7 @@ function WorkContent({ projects, timeline }) {
         {projects.map((project, index) => (
           <div 
             key={`${project.title}-${index}`}
-            ref={el => itemsRef.current[index] = el}
-            className='opacity-0'
+            className={`project-item-${index} opacity-0`}
           >
             <ProjectItem 
               project={project}
@@ -209,7 +205,7 @@ export default function Work({ data, timeline }) {
   }
 
   return (
-    <div className='h-full flex flex-col bg-[#d8cfbc] p-4'>
+    <div ref={boxRef} className='box h-full flex flex-col bg-[#d8cfbc] p-4 opacity-0'>
       <WorkContent projects={projects} timeline={timeline} />
     </div>
   );
