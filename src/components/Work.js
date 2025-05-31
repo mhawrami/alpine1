@@ -72,7 +72,7 @@ function ProjectItem({ project, index }) {
           {/* Enhanced Hover Overlay */}
           <div className='absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30'>
             <div className='bg-white text-[#565549] text-xs px-4 py-2 rounded-full font-medium shadow-sm border border-white/20'>
-              Projekt ansehen
+              Website öffnen
             </div>
           </div>
         </div>
@@ -177,7 +177,7 @@ function WorkContent({ projects, timeline }) {
         <h2 
           ref={titleRef} 
           className='text-3xl sm:text-4xl md:text-5xl font-serif text-[#565549] mb-3 sm:mb-4 leading-tight tracking-tight'>
-          Ausgewählte Arbeiten
+          Betreute Kunden
         </h2>
         <div className='w-12 sm:w-16 h-0.5 bg-[#565549]/30 mb-4 sm:mb-6'></div>
       </div>
