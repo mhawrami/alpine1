@@ -71,6 +71,41 @@
         "title": "Hallertauer Werkstatt",
         "url": "https://hallertauer-werkstatt.de/",
         "media": "/work8.jpg"
+      },
+      {
+        "title": "Fachanwältin für Familienrecht",
+        "url": "https://beratung-bayar.de",
+        "media": ""
+      },
+      {
+        "title": "Rechtsanwalt für Patent & IP",
+        "url": "https://doktorip.de",
+        "media": ""
+      },
+      {
+        "title": "Restaurant Diyar",
+        "url": "https://diyar.de",
+        "media": ""
+      },
+      {
+        "title": "Cystovy, PCOS-APP",
+        "url": "https://cystovy.de",
+        "media": ""
+      },
+      {
+        "title": "Ebrahous Service",
+        "url": "https://logistik.ebrahous.de",
+        "media": ""
+      },
+      {
+        "title": "Schreinerei Ott",
+        "url": "https://schreinerei-ott.de/",
+        "media": ""
+      },
+      {
+        "title": "T.C. Telekommunikation",
+        "url": "https://tc-informatik.de/",
+        "media": ""
       }
     ],
     "linkIcon": "/icons/arrow-icon-black.svg"
