@@ -294,10 +294,10 @@ export default function Work({ data, timeline }) {
   return (
     <Box 
       timeline={timeline}
-      className='-translate-y-full scale-0 opacity-0 bg-[#d8cfbc] p-4 h-[calc(100vh-4rem)] flex flex-col'
+      className='-translate-y-full scale-0 opacity-0 bg-[#d8cfbc] p-4 flex flex-col'
       callbackAnimation={contentAnimation}
     >
-      <div ref={containerRef} className='flex-1 overflow-hidden flex flex-col'>
+      <div ref={containerRef} className='flex-1 overflow-y-auto'>
         <WorkContent projects={projects} timeline={timeline} />
       </div>
     </Box>
