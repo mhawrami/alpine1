@@ -56,18 +56,18 @@ export default function MainGrid({ data = {} }) {
       )}
 
       {/* Bento Grid */}
-      <div className='grid h-auto min-h-screen max-h-screen grid-cols-12 grid-rows-[auto_1fr] gap-4 p-4 max-lg:grid-rows-none max-lg:py-6'>
-        <div className='col-span-full'>
+      <div className='grid h-screen max-h-[75rem] min-h-[50rem] grid-cols-12 grid-rows-10 gap-4 p-4 max-lg:h-auto max-lg:max-h-none max-lg:grid-rows-none max-lg:py-6'>
+        <div className='col-span-full row-span-1'>
           <Nav data={data?.nav} timeline={tl} />
         </div>
 
         {/* Left column */}
-        <div className='col-span-8 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:gap-4'>
-          <div className='col-span-5 max-lg:col-span-8 max-md:col-span-full'>
+        <div className='col-span-8 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
+          <div className='col-span-5 row-span-5 max-lg:col-span-8 max-md:col-span-full'>
             <Intro data={data?.intro} timeline={tl} />
           </div>
 
-          <div className='col-span-3 max-lg:col-span-4 max-md:col-span-full'>
+          <div className='col-span-3 row-span-5 max-lg:col-span-4 max-md:col-span-full'>
             <Portrait data={data?.portrait} timeline={tl} />
           </div>
 
@@ -92,8 +92,8 @@ export default function MainGrid({ data = {} }) {
         </div>
 
         {/* Right column */}
-        <div className='col-span-4 grid grid-cols-subgrid grid-rows-[1fr_auto] max-lg:col-span-full max-lg:gap-4'>
-          <div className='col-span-4 max-lg:col-span-full h-full min-h-[30rem]'>
+        <div className='col-span-4 row-span-9 grid grid-cols-subgrid grid-rows-subgrid max-lg:col-span-full max-lg:grid-rows-none max-lg:gap-4'>
+          <div className='col-span-4 row-span-8 max-lg:col-span-full'>
             <Work data={data?.work} timeline={tl} />
           </div>
 
