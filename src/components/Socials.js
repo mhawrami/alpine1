@@ -20,11 +20,11 @@ export default function Socials({ data, timeline, onImpressumClick, isImpressumA
           <a
             key={link.title}
             href={link.url}
-            target={link.title === 'Impressum' ? undefined : '_blank'}
-            rel={link.title === 'Impressum' ? undefined : 'noopener noreferrer'}
+            target={link.title === 'Rechtliches' ? undefined : '_blank'}
+            rel={link.title === 'Rechtliches' ? undefined : 'noopener noreferrer'}
             className='flex overflow-hidden text-base font-medium uppercase leading-[100%]'
             onClick={
-              link.title === 'Impressum'
+              link.title === 'Rechtliches'
                 ? e => {
                     e.preventDefault();
                     onImpressumClick();
@@ -33,7 +33,7 @@ export default function Socials({ data, timeline, onImpressumClick, isImpressumA
             }
           >
             <span className='social-link inline-block'>
-              {link.title === 'Impressum' && isImpressumActive ? 'Über mich' : link.title}
+              {link.title === 'Rechtliches' && isImpressumActive ? 'Über mich' : link.title}
             </span>
           </a>
         ))}
