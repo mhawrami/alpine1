@@ -32,19 +32,106 @@ export default function MainGrid({ data = {} }) {
     }
   };
 
-  // Impressum content styled with Tailwind
+  // Legal content styled with Tailwind
   const impressumDetails = `
-    <div class="p-4">
-      <div class="mb-4">
-        <b class="block text-sm font-medium">Alpine Development, vertreten durch:</b>
-        <p class="text-sm">Mohammed Hawrami<br>Sankt-Veit-Str. 26<br>81673 München</p>
-      </div>
-      <div class="mb-4">
-        <b class="block text-sm font-medium">Kontakt:</b>
-        <p class="text-sm">
-          <b>Telefon:</b> (089) 5591 6536<br>
-          <b>E-Mail:</b> info@alpine-dev.de
-        </p>
+    <div class="h-full overflow-y-auto pr-2">
+      <div class="space-y-6 text-sm leading-relaxed text-gray-800">
+        <div>
+          <h2 class="text-lg font-bold mb-3">📄 Impressum</h2>
+          <p class="mb-4"><strong>Angaben gemäß § 5 TMG</strong></p>
+          <address class="not-italic">
+            <p class="mb-1">Alpine Development</p>
+            <p class="mb-1">Inhaber: Mohammed Hawrami</p>
+            <p class="mb-1">St.-Veit-Str. 26</p>
+            <p class="mb-4">81673 München, Deutschland</p>
+          </address>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-2">Kontakt</h3>
+          <p class="mb-1">E-Mail: <a href="mailto:info@alpine-dev.de" class="text-blue-600 hover:underline">info@alpine-dev.de</a></p>
+          <p class="mb-4">Telefon: (bitte ergänzen, falls vorhanden)</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-2">Umsatzsteuer-ID</h3>
+          <p class="mb-4">Keine Umsatzsteuer-Identifikationsnummer gemäß §27a UStG angegeben.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-2">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</h3>
+          <p class="mb-1">Mohammed Hawrami</p>
+          <p class="mb-1">St.-Veit-Str. 26</p>
+          <p class="mb-6">81673 München</p>
+        </div>
+
+        <div class="mb-6">
+          <p class="mb-2">Plattform der EU-Kommission zur Online-Streitbeilegung:</p>
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://ec.europa.eu/consumers/odr/</a>
+          <p class="mt-2">Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold mb-3">🔐 Datenschutzerklärung</h2>
+          
+          <h3 class="font-bold mt-4 mb-2">1. Allgemeine Hinweise</h3>
+          <p class="mb-4">Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf unserer Website alpine-dev.de.</p>
+          
+          <h3 class="font-bold mt-4 mb-2">2. Verantwortlicher</h3>
+          <p class="mb-1">Mohammed Hawrami</p>
+          <p class="mb-1">Alpine Development</p>
+          <p class="mb-1">St.-Veit-Str. 26</p>
+          <p class="mb-4">81673 München</p>
+          <p class="mb-4">E-Mail: <a href="mailto:info@alpine-dev.de" class="text-blue-600 hover:underline">info@alpine-dev.de</a></p>
+          
+          <h3 class="font-bold mt-4 mb-2">3. Hosting</h3>
+          <p class="mb-4">Unsere Website wird bei Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA gehostet. Die Datenverarbeitung erfolgt auf Grundlage eines Auftragsverarbeitungsvertrags gemäß Art. 28 DSGVO. Weitere Informationen finden Sie in der <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Datenschutzerklärung von Vercel</a>.</p>
+          
+          <h3 class="font-bold mt-4 mb-2">4. Server-Logfiles</h3>
+          <p class="mb-2">Beim Aufruf unserer Website erhebt Vercel automatisch Informationen in sogenannten Server-Logfiles. Diese Daten umfassen:</p>
+          <ul class="list-disc pl-5 mb-4">
+            <li>IP-Adresse (ggf. anonymisiert)</li>
+            <li>Datum und Uhrzeit des Zugriffs</li>
+            <li>Browsertyp und -version</li>
+            <li>verwendetes Betriebssystem</li>
+            <li>Referrer-URL</li>
+            <li>aufgerufene Seiten</li>
+          </ul>
+          <p class="mb-4">Die Verarbeitung dieser Daten erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO zur Wahrung unseres berechtigten Interesses an einem sicheren und stabilen Betrieb der Website.</p>
+          
+          <h3 class="font-bold mt-4 mb-2">5. Kontaktmöglichkeiten</h3>
+          <p class="mb-2">Sie können uns über folgende Wege kontaktieren:</p>
+          <ul class="list-disc pl-5 mb-4">
+            <li>E-Mail via <a href="mailto:info@alpine-dev.de" class="text-blue-600 hover:underline">info@alpine-dev.de</a></li>
+            <li>Telefon (falls angegeben)</li>
+            <li>WhatsApp (Weiterleitung via Button)</li>
+            <li>Instagram (externer Link zu unserem Profil)</li>
+          </ul>
+          <p class="mb-4">Bei Kontaktaufnahme werden die von Ihnen übermittelten Daten (z. B. Name, Telefonnummer, E-Mail-Adresse) zur Bearbeitung Ihrer Anfrage verarbeitet. Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
+          
+          <h3 class="font-bold mt-4 mb-2">6. Weiterleitungen zu Drittplattformen</h3>
+          <p class="mb-4">Unsere Website verlinkt zu externen Diensten wie WhatsApp und Instagram. Beim Klick auf einen entsprechenden Button verlassen Sie unsere Website und unterliegen den Datenschutzbestimmungen des jeweiligen Anbieters.</p>
+          
+          <h3 class="font-bold mt-4 mb-2">7. Vercel Analytics</h3>
+          <p class="mb-4">Sofern Vercel Analytics aktiv ist, wird das Verhalten der Nutzer (z. B. Seitenaufrufe, Aufenthaltsdauer) in anonymisierter Form erfasst. Es werden keine personenbezogenen Daten gespeichert oder an Dritte weitergegeben. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verbesserung unseres Webangebots).</p>
+          
+          <h3 class="font-bold mt-4 mb-2">8. Ihre Rechte</h3>
+          <p class="mb-2">Sie haben jederzeit das Recht auf:</p>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Auskunft gemäß Art. 15 DSGVO</li>
+            <li>Berichtigung gemäß Art. 16 DSGVO</li>
+            <li>Löschung gemäß Art. 17 DSGVO</li>
+            <li>Einschränkung der Verarbeitung gemäß Art. 18 DSGVO</li>
+            <li>Datenübertragbarkeit gemäß Art. 20 DSGVO</li>
+            <li>Widerspruch gemäß Art. 21 DSGVO</li>
+          </ul>
+          
+          <h3 class="font-bold mt-4 mb-2">9. Beschwerderecht</h3>
+          <p class="mb-4">Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn Sie der Meinung sind, dass die Verarbeitung Ihrer Daten gegen die DSGVO verstößt.</p>
+          
+          <h3 class="font-bold mt-4 mb-2">10. Änderungen dieser Datenschutzerklärung</h3>
+          <p class="mb-4">Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, z. B. bei rechtlichen Änderungen oder neuen Funktionen auf der Website.</p>
+        </div>
       </div>
     </div>
   `;
