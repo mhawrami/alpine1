@@ -20,35 +20,36 @@ export default function About({ data, timeline, isImpressumActive }) {
       callbackAnimation={contentAnimation}
     >
       <div className='flex h-full flex-col'>
-        {/* Icon - Fixed at top */}
-        <div className='size-[2.75rem] flex-shrink-0'>
-          {data?.icon && (
-            <Image
-              src={data.icon}
-              width={48}
-              height={48}
-              alt='disk'
-              className='about-icon size-full'
-            />
-          )}
-        </div>
-
-        {/* Spacer to push content down */}
-        <div className='flex-1 min-h-4'></div>
-
-        {/* Dynamic Content - Fixed at bottom */}
-        <div className='about-text-wrapper flex-shrink-0'>
-          {isImpressumActive ? (
+        {isImpressumActive ? (
+          // Full height scrollable legal content
+          <div className='flex-1 overflow-hidden'>
             <div 
-              className='impressum-content max-h-[calc(100%-4rem)] overflow-y-auto pr-2 text-sm leading-relaxed text-gray-800'
+              className='h-full overflow-y-auto pr-2 text-sm leading-relaxed text-gray-800'
               dangerouslySetInnerHTML={{ __html: data?.text }}
             />
-          ) : (
-            <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
-              {data?.text}
-            </p>
-          )}
-        </div>
+          </div>
+        ) : (
+          // Normal about view with icon and text at bottom
+          <>
+            <div className='size-[2.75rem] flex-shrink-0'>
+              {data?.icon && (
+                <Image
+                  src={data.icon}
+                  width={48}
+                  height={48}
+                  alt='disk'
+                  className='about-icon size-full'
+                />
+              )}
+            </div>
+            <div className='flex-1 min-h-4'></div>
+            <div className='flex-shrink-0'>
+              <p className='about-text max-w-[25rem] pb-2 text-lg leading-[135%]'>
+                {data?.text}
+              </p>
+            </div>
+          </>
+        )}
       </div>
     </Box>
   );
