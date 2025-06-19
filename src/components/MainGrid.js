@@ -50,7 +50,7 @@ export default function MainGrid({ data = {} }) {
         <div>
           <h3 class="font-bold mb-2">Kontakt</h3>
           <p class="mb-1">E-Mail: <a href="mailto:info@alpine-dev.de" class="text-blue-600 hover:underline">info@alpine-dev.de</a></p>
-          <p class="mb-4">Telefon: (bitte ergänzen, falls vorhanden)</p>
+          <p class="mb-4">Telefon: <a href="tel:08955916536" class="text-blue-600 hover:underline">089 55916536</a></p>
         </div>
 
         <div>
