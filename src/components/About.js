@@ -19,8 +19,8 @@ export default function About({ data, timeline, isImpressumActive }) {
       className='-translate-y-full scale-0 opacity-0'
       callbackAnimation={contentAnimation}
     >
-      <div className='flex h-full flex-col gap-4'>
-        {/* Icon */}
+      <div className='flex h-full flex-col'>
+        {/* Icon - Fixed at top */}
         <div className='size-[2.75rem] flex-shrink-0'>
           {data?.icon && (
             <Image
@@ -33,11 +33,14 @@ export default function About({ data, timeline, isImpressumActive }) {
           )}
         </div>
 
-        {/* Dynamic Content */}
-        <div className='about-text-wrapper flex-1 overflow-hidden'>
+        {/* Spacer to push content down */}
+        <div className='flex-1 min-h-4'></div>
+
+        {/* Dynamic Content - Fixed at bottom */}
+        <div className='about-text-wrapper flex-shrink-0'>
           {isImpressumActive ? (
             <div 
-              className='impressum-content h-full overflow-y-auto pr-2 text-sm leading-relaxed text-gray-800'
+              className='impressum-content max-h-[calc(100%-4rem)] overflow-y-auto pr-2 text-sm leading-relaxed text-gray-800'
               dangerouslySetInnerHTML={{ __html: data?.text }}
             />
           ) : (
