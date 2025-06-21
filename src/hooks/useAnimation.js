@@ -9,14 +9,22 @@ export const useGlobalTimeline = loaded => {
   useGSAP(() => {
     if (DISABLE_LOADING_ANIMATION) return;
 
-    gsap.set(document.body, { overflow: 'hidden' });
-    window.scrollTo({ top: 0 });
+    // Don't block scrolling on mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!isMobile) {
+      gsap.set(document.body, { overflow: 'hidden' });
+      window.scrollTo({ top: 0 });
+    }
 
     if (!loaded) return;
 
     const tl = gsap.timeline({
       defaults: { ease: 'power3.out' },
-      onComplete: () => gsap.set(document.body, { overflow: 'auto' }),
+      onComplete: () => {
+        if (!isMobile) {
+          gsap.set(document.body, { overflow: 'auto' });
+        }
+      },
     });
     setTl(tl);
   }, [loaded]);
